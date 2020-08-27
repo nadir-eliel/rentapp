@@ -6,14 +6,13 @@ var Schema = mongoose.Schema;
 
 // Creamos el objeto del esquema y sus atributos
 var InmuebleSchema = Schema({
-    address:{line: String, city: String, province: String},
-    name: String,
     bathroom_count: Number,
     badroom_count: Number,
     garage: Boolean,
     backyard: Boolean,
     pets: Boolean, 
     kids: Boolean,
+    address:{line: String, city: String, province: String},
     photos: [String],
 });
 // Exportamos el modelo para usarlo en otros ficheros
