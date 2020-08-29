@@ -9,13 +9,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      vistaActual: null,
+      vistaActual: null
     };
   }
 
   render() {
-    return <div className="App">"Homepage"</div>;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "App"
+    });
   }
+
 }
 
 export default App;
