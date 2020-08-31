@@ -38,7 +38,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-//Actualizar un user
+//Actualizar un usuario
 router.put('/:idUser', async(req, res) => {
     try{
         const user = await User.findOne({_id:req.params.idUser}).exec();
@@ -52,7 +52,7 @@ router.put('/:idUser', async(req, res) => {
     }
 });
 
-//Eliminar un user
+//Eliminar un usuario
 router.delete('/:userId', async(req, res) => {
     try{
         await User.deleteOne({ _id:req.params.userId}).exec();
