@@ -5,15 +5,16 @@ var Schema = mongoose.Schema;
 
 // Creamos el objeto del esquema y sus atributos
 var UserSchema = Schema({
-    user_name: String,
-    name: String,
-    surname: String,
-    password: String,
-    user_type: Number,
-    phone: String,
-    date_of_birth: Date,
-    create_at: Date,
-    update_at: Date
+    user_name: {type: String, required: true},
+    name: {type: String, required: true},
+    surname: {type: String, required: true},
+    email: {type: String, required: true},
+    password: {type: String, required: true},
+    user_type: {type: String, required: true},
+    phone: {type: String, required: true},
+    date_of_birth: {type: Date, required: true},
+    create_at: { type : Date, default: Date.now },
+    update_at: { type : Date, default: Date.now }
 });
 
 module.exports = mongoose.model('User', UserSchema);
