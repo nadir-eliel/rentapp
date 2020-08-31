@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Apartament = require('../models/Apartament');
 
-//Obtener todos los inmuebles
+//Obtener todos los apartaments
 router.get('/', async (req, res) => {
     try{
         const apartaments = await Apartament.find().exec();
@@ -12,8 +12,7 @@ router.get('/', async (req, res) => {
         return res.send(error.message);
     }
 });
-
-//Obtener un inmueble
+//Obtener un apartament
 router.get('/:idApartament', async(req, res) => {
     try{
         //const apartament = await Apartament.findOne({_id:req.params.idInmueble}).exec();
