@@ -4,7 +4,7 @@ const { request, response } = require('express');
 const User = require('../models/User');
 
 
-//Obtener todos los usuarios
+//Obtener todos los users
 router.get('/', async (req, res) => {
     try{
         const users = await User.find().exec();
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-//Obtener un usuario
+//Obtener un user
 router.get('/:idUser', async(req, res) => {
     try{
         const user = await User.findById(req.params.idUser).exec();
@@ -26,12 +26,12 @@ router.get('/:idUser', async(req, res) => {
     }
 });
 
-//Mostrar registro de usuario
+//Mostrar registro de user
 router.get('/register', async(req, res) => {
     return res.send("VISTA PARA REGISTRARSE");
 });
 
-//Registrar un usuario
+//Registrar un user
 router.post('/register', async (req, res) => {
     try{
         const user = new User({
@@ -55,7 +55,7 @@ router.post('/register', async (req, res) => {
 });
 
 
-//Mostrar login de usuario
+//Mostrar login de user
 router.get('/login', async(req, res) => {
     return res.send("VISTA PARA INGRESAR/LOGUEARSE");
 });
@@ -69,7 +69,7 @@ router.get('/logout', async(req, res) => {
 });
 
 
-//Actualizar usuario
+//Actualizar un user
 router.put('/:idUser', async(req, res) => {
     try{
         const user = await User.findOne({_id:req.params.idUser}).exec();
@@ -82,7 +82,7 @@ router.put('/:idUser', async(req, res) => {
     }
 });
 
-//Eliminar un usuario
+//Eliminar un user
 router.delete('/:userId', async(req, res) => {
     try{
         await User.deleteOne({ _id:req.params.userId}).exec();
