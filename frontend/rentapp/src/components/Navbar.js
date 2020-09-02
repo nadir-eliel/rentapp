@@ -11,6 +11,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import { Link, withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,13 +25,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuAppBar() {
+function MenuAppBar(props) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  const handleChange = (event) => {
+ const handleChange = (event) => {
     setAuth(event.target.checked);
   };
 
@@ -44,6 +45,7 @@ export default function MenuAppBar() {
 
   return (
     <div className={classes.root}>
+    
       <FormGroup></FormGroup>
       <AppBar position="static">
         <Toolbar>
@@ -84,8 +86,12 @@ export default function MenuAppBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Login</MenuItem>
-                <MenuItem onClick={handleClose}>Sign In</MenuItem>
+
+                 <Link to="/users" className="link" onClick={handleClose}>
+                  <MenuItem>Login</MenuItem>   </Link>
+                <Link to="/signin" className="link" onClick={handleClose}>
+                  <MenuItem>Sign In</MenuItem>  </Link>
+          
               </Menu>
             </div>
           )}
@@ -94,3 +100,6 @@ export default function MenuAppBar() {
     </div>
   );
 }
+
+
+export default withRouter(MenuAppBar);

@@ -33,32 +33,27 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-var AddCommentaryForm = /*#__PURE__*/function (_Component) {
-  _inherits(AddCommentaryForm, _Component);
+var Home = /*#__PURE__*/function (_Component) {
+  _inherits(Home, _Component);
 
-  var _super = _createSuper(AddCommentaryForm);
+  var _super = _createSuper(Home);
 
-  function AddCommentaryForm(props) {
-    var _this;
+  function Home() {
+    _classCallCheck(this, Home);
 
-    _classCallCheck(this, AddCommentaryForm);
-
-    _this = _super.call(this, props);
-    _this.state = {};
-    return _this;
+    return _super.apply(this, arguments);
   }
 
-  _createClass(AddCommentaryForm, [{
+  _createClass(Home, [{
     key: "render",
     value: function render() {
-      return;
-
-      /*#__PURE__*/
-      _react.default.createElement("div", null, "\"AddCommentaryForm\"");
+      return /*#__PURE__*/_react.default.createElement("div", {
+        className: "page"
+      }, /*#__PURE__*/_react.default.createElement("h1", null, "antes de loguearse la persona: va buscador e imagen tambien se hace link en el logo para regresar,"));
     }
   }]);
 
-  return AddCommentaryForm;
+  return Home;
 }(_react.Component);
 
-exports.default = AddCommentaryForm;
+exports.default = Home;

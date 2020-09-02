@@ -19,10 +19,6 @@ var _md = _interopRequireDefault(require("md5"));
 
 var _core = require("@material-ui/core");
 
-var _styles = require("@material-ui/core/styles");
-
-var _Paper = _interopRequireDefault(require("@material-ui/core/Paper"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -51,20 +47,6 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var useStyles = (0, _styles.makeStyles)(function (theme) {
-  return {
-    root: {
-      flexGrow: 1,
-      display: 'flex',
-      flexWrap: 'wrap'
-    },
-    paper: {
-      padding: theme.spacing(2),
-      margin: 'auto',
-      maxWidth: 400
-    }
-  };
-});
 var baseUrl = "http://localhost:3001/users";
 
 function Users(props) {
@@ -76,8 +58,6 @@ function Users(props) {
       _useState2 = _slicedToArray(_useState, 2),
       state = _useState2[0],
       setState = _useState2[1];
-
-  var classes = useStyles();
 
   var handleChange = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
@@ -116,7 +96,12 @@ function Users(props) {
                 }
               }).then(function (response) {
                 return response.data;
-              }).then(function (response) {
+              })
+              /* .then(response=>{
+               if(response.length>0){
+                 redirectToHome();
+               }})*/
+              .then(function (response) {
                 console.log(response); //if (response.status===200){
 
                 if (response.length > 0) {
@@ -124,7 +109,8 @@ function Users(props) {
                     return _objectSpread(_objectSpread({}, prevState), {}, {
                       'successMessage': 'Login successful. Redirecting to home page..'
                     });
-                  });
+                  }); //localStorage.setItem(ACCESS_TOKEN_NAME,response.data.token);
+
                   redirectToHome();
                   props.showError(null);
                 } else if (response.code === 204) {
@@ -159,63 +145,60 @@ function Users(props) {
     props.updateTitle('Signin');
   };
 
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: classes.root
-  }, /*#__PURE__*/_react.default.createElement(_Paper.default, {
-    className: classes.paper
-  }, /*#__PURE__*/_react.default.createElement(_core.Grid, {
-    container: true,
-    spacing: 4,
-    justify: "center"
-  }, /*#__PURE__*/_react.default.createElement(_core.Grid, {
-    container: true,
-    direction: "column",
-    justify: "center",
-    alignItems: "center",
-    item: true,
-    md: 12
-  }, /*#__PURE__*/_react.default.createElement(_core.FormControl, null, /*#__PURE__*/_react.default.createElement(_core.InputLabel, {
-    htmlFor: "usuario"
-  }, "Usuario:"), /*#__PURE__*/_react.default.createElement(_core.Input, {
-    name: "user_name",
-    type: "usuario",
-    "arai-describedby": "usuario-helper",
-    onChange: handleChange
-  }), /*#__PURE__*/_react.default.createElement(_core.FormHelperText, {
-    id: "usuario-helper"
-  }, "Ingrese su nombre de Usuario"))), /*#__PURE__*/_react.default.createElement(_core.Grid, {
-    container: true,
-    direction: "column",
-    justify: "center",
-    alignItems: "center",
-    item: true,
-    md: 12
-  }, /*#__PURE__*/_react.default.createElement(_core.FormControl, null, /*#__PURE__*/_react.default.createElement(_core.InputLabel, {
+  return /*#__PURE__*/_react.default.createElement(_core.Container, null, /*#__PURE__*/_react.default.createElement(_core.FormControl, null, /*#__PURE__*/_react.default.createElement(_core.Imputlabel, {
+    htmlFor: "email"
+  }, "Email"), /*#__PURE__*/_react.default.createElement(_core.Imput, {
+    id: "email",
+    type: "email",
+    "arai-describedby": "email-helper"
+  }), /*#__PURE__*/_react.default.createElement(FormaHelperText, {
+    id: "email-helper"
+  }, " Tu email Personal (no empresarial)")), /*#__PURE__*/_react.default.createElement(_core.FormControl, null, /*#__PURE__*/_react.default.createElement(_core.Imputlabel, {
     htmlFor: "pwd"
-  }, "Password"), /*#__PURE__*/_react.default.createElement(_core.Input, {
-    name: "password",
+  }, "Password"), /*#__PURE__*/_react.default.createElement(_core.Imput, {
+    id: "pwd",
     type: "password",
-    "arai-describedby": "password-helper",
-    onChange: handleChange
-  }), /*#__PURE__*/_react.default.createElement(_core.FormHelperText, {
+    "arai-describedby": "password-helper"
+  }), /*#__PURE__*/_react.default.createElement(FormaHelperText, {
     id: "password-helper"
-  }, "Ingrese su Password"))), /*#__PURE__*/_react.default.createElement(_core.Grid, {
-    container: true,
-    direction: "column",
-    justify: "center",
-    alignItems: "center",
-    item: true,
-    md: 12
-  }, /*#__PURE__*/_react.default.createElement(_core.Button, {
-    variant: "contained",
-    color: "primary",
-    onClick: login
-  }, "Iniciar Sesi\xF3n"))), /*#__PURE__*/_react.default.createElement("div", {
-    className: "registerMessage"
-  }, /*#__PURE__*/_react.default.createElement("span", null, "\xBFNo tengo una cuenta? "), /*#__PURE__*/_react.default.createElement("span", {
-    className: "loginText",
-    onClick: redirectToRegister
-  }, "Registrese"))));
+  }, " Entre 8 y 16 caracteres")))
+  /*
+  
+        
+     <div className="containerUsers">
+        <div className="containerUsersSecundario">
+        <div className="form-group">
+          <label>Usuario: </label>
+          <br />
+          <input
+            type="text"
+            placeholder="Nombre"
+            className="form-control"
+            name="user_name"
+            onChange={handleChange}
+          />
+          <br />
+          <label>Contraseña: </label>
+          <br />
+          <input type="password" 
+                placeholder="Password"
+                className="form-control" 
+                name="password" 
+                onChange={handleChange}
+                  />
+  
+           <br />
+          <button className="btn btn-primary" onClick={ login}>Iniciar Sesión</button>
+        </div>
+       
+        <div className="registerMessage">
+                  <span>¿No tengo una cuenta? </span>
+                  <span className="loginText"  onClick={ redirectToRegister}>Registrese</span> 
+                
+              </div>
+      </div>
+    </div>*/
+  ;
 }
 
 var _default = (0, _reactRouterDom.withRouter)(Users);
