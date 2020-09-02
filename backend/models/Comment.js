@@ -6,10 +6,10 @@ var Schema = mongoose.Schema;
 
 // Creamos el objeto del esquema y sus atributos
 var CommentSchema = Schema({
-    comment: String,
-    created_at: { type : Date, default: Date.now },
-    update_at: { type : Date, default: Date.now },
-    user : { type: Schema.Types.ObjectId, ref: 'User' },
+    comment: {type: String},
+    created_at: {type : Date, default: Date.now },
+    update_at: {type : Date, default: Date.now },
+    user : {type: Schema.Types.ObjectId, ref: 'User' },
     apartament : {type: Schema.Types.ObjectId, ref: 'Comment'}
 });
 
