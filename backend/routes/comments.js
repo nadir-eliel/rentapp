@@ -15,6 +15,17 @@ router.get('/', async (req, res) => {
     }
 });
 
+//Obtener un comment
+router.get('/:idComment', async(req, res) => {
+    try{
+        const comment = await Comment.findById(req.params.idComment).exec();
+        res.json(comment);
+    }
+    catch(error){
+        return res.send(error.message);
+    }
+});
+
 //Crear un comment
 router.post('/create', async (req, res) => {
     try{

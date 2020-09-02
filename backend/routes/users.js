@@ -15,13 +15,30 @@ router.get('/', async (req, res) => {
     }
 });
 
-//Crear un usuario
-router.post('/login', async (req, res) => {
+//Obtener un usuario
+router.get('/:idUser', async(req, res) => {
+    try{
+        const user = await User.findById(req.params.idUser).exec();
+        res.json(user);
+    }
+    catch(error){
+        return res.send(error.message);
+    }
+});
+
+//Mostrar registro de usuario
+router.get('/register', async(req, res) => {
+    return res.send("VISTA PARA REGISTRARSE");
+});
+
+//Registrar un usuario
+router.post('/register', async (req, res) => {
     try{
         const user = new User({
             user_name: req.body.user_name,
             name: req.body.name,
             surname: req.body.surname,
+            email: req.body.email,
             password: req.body.password,
             user_type: req.body.user_type,
             phone: req.body.phone,
@@ -38,6 +55,20 @@ router.post('/login', async (req, res) => {
 });
 
 
+//Mostrar login de usuario
+router.get('/login', async(req, res) => {
+    return res.send("VISTA PARA INGRESAR/LOGUEARSE");
+});
+//Verificar si los datos ingresados existen 
+router.post('/login', async(req, res) => {
+    return res.send("VERIFICA LAS CREDENCIALES");
+});
+//Para cerrar sesion
+router.get('/logout', async(req, res) => {
+    return res.send("CIERRA LA SESION Y REDIRIGE");
+});
+
+
 //Actualizar usuario
 router.put('/:idUser', async(req, res) => {
     try{
@@ -45,7 +76,6 @@ router.put('/:idUser', async(req, res) => {
         user.set(req.body);
         await user.save();
         res.json({success: 'SE ACTUALIZO CON EXITO!'});
-        //res.json(inmueble);
     }
     catch(error){
         return res.json(error.message);

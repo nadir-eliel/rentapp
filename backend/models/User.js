@@ -5,10 +5,10 @@ var Schema = mongoose.Schema;
 
 // Creamos el objeto del esquema y sus atributos
 var UserSchema = Schema({
-    user_name: {type: String, required: true},
-    name: {type: String, required: true},
-    surname: {type: String, required: true},
-    email: {type: String, required: true},
+    user_name: {type: String, required: true, uppercase: true},
+    name: {type: String, required: true, uppercase: true},
+    surname: {type: String, required: true, uppercase: true},
+    email: {type: String, required: true, uppercase: true},
     password: {type: String, required: true},
     user_type: {type: String, required: true},
     phone: {type: String, required: true},
