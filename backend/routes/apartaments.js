@@ -3,7 +3,7 @@ var router = express.Router();
 var Apartament = require('../models/Apartament');
 
 //Obtener todos los apartaments
-router.get('/', async (req, res) => {
+router.get('/apart', async (req, res) => {
     try{
         const apartaments = await Apartament.find().exec();
         res.json(apartaments);
@@ -12,6 +12,30 @@ router.get('/', async (req, res) => {
         return res.send(error.message);
     }
 });
+
+//Obtener todos las ciudades
+router.get('/citys', async (req, res) => {
+    try{
+        const salida = [];
+        const citys = [];
+        const apartaments = await Apartament.find().exec();
+        apartaments.forEach(element => {
+            if (element.address.city != null){
+                const city = element.address.city.toUpperCase();
+                const province = element.address.province.toUpperCase();
+             if(!citys.includes(city)){
+                citys.push(city);
+                salida.push({city, province});
+             }
+            }
+        });
+        res.json(salida);
+    }
+    catch(error){
+        return res.send(error.message);
+    }
+});
+
 //Obtener un apartament
 router.get('/:idApartament', async(req, res) => {
     try{
@@ -77,5 +101,4 @@ router.delete('/:apartamentId', async(req, res) => {
         return res.json(error.message)
     }
 });
-
 module.exports = router;
