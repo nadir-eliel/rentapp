@@ -15,8 +15,25 @@ router.get('/', async (req, res) => {
     }
 });
 
-//Crear un user
-router.post('/login', async (req, res) => {
+
+//Obtener un user
+router.get('/:idUser', async(req, res) => {
+    try{
+        const user = await User.findById(req.params.idUser).exec();
+        res.json(user);
+    }
+    catch(error){
+        return res.send(error.message);
+    }
+});
+
+//Mostrar registro de user
+router.get('/register', async(req, res) => {
+    return res.send("VISTA PARA REGISTRARSE");
+});
+
+//Registrar un user
+router.post('/register', async (req, res) => {
     try{
         const user = new User({
             user_name: req.body.user_name,
@@ -38,21 +55,36 @@ router.post('/login', async (req, res) => {
     }
 });
 
-//Actualizar un usuario
+
+//Mostrar login de user
+router.get('/login', async(req, res) => {
+    return res.send("VISTA PARA INGRESAR/LOGUEARSE");
+});
+//Verificar si los datos ingresados existen 
+router.post('/login', async(req, res) => {
+    return res.send("VERIFICA LAS CREDENCIALES");
+});
+//Para cerrar sesion
+router.get('/logout', async(req, res) => {
+    return res.send("CIERRA LA SESION Y REDIRIGE");
+});
+
+
+//Actualizar un user
+
 router.put('/:idUser', async(req, res) => {
     try{
         const user = await User.findOne({_id:req.params.idUser}).exec();
         user.set(req.body);
         await user.save();
         res.json({success: 'SE ACTUALIZO CON EXITO!'});
-        //res.json(inmueble);
     }
     catch(error){
         return res.json(error.message);
     }
 });
 
-//Eliminar un usuario
+//Eliminar un user
 router.delete('/:userId', async(req, res) => {
     try{
         await User.deleteOne({ _id:req.params.userId}).exec();
