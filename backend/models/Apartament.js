@@ -21,6 +21,7 @@ var ApartamentSchema = Schema({
     photos: [String],
     rates: [{user_name:String , rate:Number, rate_date:Date}],
     score_date: {type: Number},
+    comments_count:{type: Number},
     created_at: {type : Date, default: Date.now },
     update_at: {type : Date, default: Date.now },
     user : {type: Schema.Types.ObjectId, ref: 'User' },

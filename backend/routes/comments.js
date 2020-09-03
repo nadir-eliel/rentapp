@@ -31,7 +31,6 @@ router.post('/create', async (req, res) => {
     try{
         const comment = new Comment({
             comment: req.body.comment,
-            comments_count: req.body.comments_count,
             user: req.body.user,
             apartament: req.body.apartament,
             create_at: req.body.create_at,
