@@ -68,7 +68,7 @@ router.post('/create', async (req, res) => {
             score_rate: req.body.score_rate,
             comments_count: req.body.comments_count,
             create_at: req.body.create_at,
-            update_at: req.body.update_at,
+            update_at: req.body.update_at
         });
         const savedApartament = await apartament.save();
         res.json(savedApartament);
