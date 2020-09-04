@@ -15,11 +15,13 @@ require("./App.css");
 
 var _Users = _interopRequireDefault(require("./components/Users"));
 
-var _Buildings = _interopRequireDefault(require("./components/Buildings"));
-
 var _Navbar = _interopRequireDefault(require("./components/Navbar"));
 
 var _AlertComponent = _interopRequireDefault(require("./components/AlertComponent"));
+
+var _FilterdProperty = _interopRequireDefault(require("./components/FilterdProperty"));
+
+var _Property = _interopRequireDefault(require("./components/Property"));
 
 var _AddUser = _interopRequireDefault(require("./components/AddUser"));
 
@@ -62,7 +64,7 @@ function App() {
   }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/",
     exact: true
-  }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  }, /*#__PURE__*/_react.default.createElement(_Property.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/users"
   }, /*#__PURE__*/_react.default.createElement(_Users.default, {
@@ -72,6 +74,11 @@ function App() {
     exact: true,
     path: "/signin"
   }, /*#__PURE__*/_react.default.createElement(_AddUser.default, {
+    showError: updateErrorMessage,
+    updateTitle: updateTitle
+  })), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: "/filterdproperty"
+  }, /*#__PURE__*/_react.default.createElement(_FilterdProperty.default, {
     showError: updateErrorMessage,
     updateTitle: updateTitle
   }))), /*#__PURE__*/_react.default.createElement(_AlertComponent.default, {

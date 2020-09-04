@@ -57,8 +57,9 @@ function MenuAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            RentApp
+         
+          <Typography variant="h6" className={classes.title} >
+          <Link to="/" >RentApp</Link>
           </Typography>
           {auth && (
             <div>

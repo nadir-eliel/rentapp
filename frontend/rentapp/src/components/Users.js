@@ -19,20 +19,14 @@ import {Container,
           flexGrow: 1,
           display: 'flex',
           flexWrap: 'wrap',
-          
-        },
+          },
         paper: {
           padding: theme.spacing(2),
           margin: 'auto',
           maxWidth: 400,
         },
-        
       }));
-
-
 const baseUrl="http://localhost:3001/users";
-
-
 
  function Users (props) {
      const [state , setState] = useState({
@@ -42,7 +36,6 @@ const baseUrl="http://localhost:3001/users";
 })
 
 const classes = useStyles();
-
 
  const handleChange= async (event)=>{
     await setState({

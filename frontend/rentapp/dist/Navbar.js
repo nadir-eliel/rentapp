@@ -100,7 +100,9 @@ function MenuAppBar(props) {
   }, /*#__PURE__*/_react.default.createElement(_Menu.default, null)), /*#__PURE__*/_react.default.createElement(_Typography.default, {
     variant: "h6",
     className: classes.title
-  }, "RentApp"), auth && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_IconButton.default, {
+  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/"
+  }, "RentApp")), auth && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_IconButton.default, {
     "aria-label": "account of current user",
     "aria-controls": "menu-appbar",
     "aria-haspopup": "true",
