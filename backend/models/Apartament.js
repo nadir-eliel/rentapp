@@ -1,11 +1,13 @@
 // Cargamos el módulo de mongoose
-var mongoose =  require('mongoose');
+const mongoose =  require('mongoose');
+
+const config = require('../config');
 
 // Usaremos los esquemas
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 // Creamos el objeto del esquema y sus atributos
-var ApartamentSchema = Schema({
+const ApartamentSchema = Schema({
     price: {type: Number, required: true},
     bathroom_count: {type: Number, required: true},
     bedroom_count: {type: Number, required: true},
@@ -16,8 +18,10 @@ var ApartamentSchema = Schema({
     pets: {type: Boolean, required: true},
     backyard: {type: Boolean, required: true},
     pool: {type: Boolean, required: true},
-    address:{line:{type: String, uppercase: true, required: true}, city: {type: String, uppercase: true, required:true}, province: {type: String, uppercase: true, required: true}, link_map:{type: String}},
-    photo:{type:String, required: true},
+    //address:{line:{type: String, uppercase: true, required: true}, city: {type: String, uppercase: true, required:true}, province: {type: String, uppercase: true, required: true}, link_map:{type: String}},
+    address:{line:{type: String, uppercase: true}, city: {type: String, uppercase: true}, province: {type: String, uppercase: true}, link_map:{type: String}},
+    //photo:{type:String, required: true},
+    //photo:{type:String},
     photos: [String],
     rates: [{user_name:String , rate:Number, rate_date:Date}],
     score_date: {type: Number},
@@ -26,6 +30,13 @@ var ApartamentSchema = Schema({
     update_at: {type : Date, default: Date.now },
     user : {type: Schema.Types.ObjectId, ref: 'User' },
 });
+
+ApartamentSchema.methods.setImgUrl = function setImgUrl(filename) {
+   const port = config.port;
+   const host = config.host;
+   //this.photo = `${host}:${port}/public/${filename}`;
+   this.photos.push(`${host}:${port}/public/${filename}`);
+}
 
 // Exportamos el modelo para usarlo en otros ficheros
 module.exports = mongoose.model('Apartament', ApartamentSchema);
