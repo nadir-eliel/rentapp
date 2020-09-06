@@ -44,7 +44,7 @@ var useStyles = (0, _styles.makeStyles)(function (theme) {
       color: theme.palette.text.secondary
     },
     media: {
-      height: 140
+      height: 280
     }
   };
 });
@@ -74,7 +74,7 @@ function FilterProperty() {
   }, /*#__PURE__*/_react.default.createElement(_CardActionArea.default, null, /*#__PURE__*/_react.default.createElement(_CardMedia.default, {
     className: classes.media,
     image: avatar
-  }), /*#__PURE__*/_react.default.createElement("h1", null, "imagen"))))), /*#__PURE__*/_react.default.createElement(_Grid.default, {
+  }))))), /*#__PURE__*/_react.default.createElement(_Grid.default, {
     item: true,
     xs: 12,
     sm: 4
