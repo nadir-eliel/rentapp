@@ -44,6 +44,7 @@ router.post('/register', async (req, res) => {
             user_type: req.body.user_type,
             phone: req.body.phone,
             date_of_birth: req.body.date_of_birth,
+            photo: req.body.photo,
             create_at: req.body.create_at,
             update_at: req.body.update_at,
         });

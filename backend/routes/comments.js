@@ -34,7 +34,7 @@ router.post('/create', async (req, res) => {
             user: req.body.user,
             apartament: req.body.apartament,
             create_at: req.body.create_at,
-            update_at: req.body.update_at,
+            update_at: req.body.update_at
         });
         const savedComment = await comment.save();
         res.json(savedComment);

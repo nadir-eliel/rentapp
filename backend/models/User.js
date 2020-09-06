@@ -13,6 +13,7 @@ var UserSchema = Schema({
     user_type: {type: String, required: true},
     phone: {type: String, required: true},
     date_of_birth: {type: Date, required: true},
+    photo: {type: String},
     create_at: { type : Date, default: Date.now },
     update_at: { type : Date, default: Date.now }
 });

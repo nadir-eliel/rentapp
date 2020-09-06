@@ -52,6 +52,7 @@ router.get('/:idApartament', async(req, res) => {
 router.post('/create', async (req, res) => {
     try{
         const apartament = new Apartament({
+            price: req.body.price,
             bathroom_count: req.body.bathroom_count,
             bedroom_count: req.body.badroom_count,
             room_count: req.body.room_count,
@@ -62,11 +63,13 @@ router.post('/create', async (req, res) => {
             backyard: req.body.backyard,
             pool: req.body.pool,
             address: req.body.address,
+            photo: req.body.photo,
             photos: req.body.photos,
             rates: req.body.rates,
             score_rate: req.body.score_rate,
+            comments_count: req.body.comments_count,
             create_at: req.body.create_at,
-            update_at: req.body.update_at,
+            update_at: req.body.update_at
         });
         const savedApartament = await apartament.save();
         res.json(savedApartament);
