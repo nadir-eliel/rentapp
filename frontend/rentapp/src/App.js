@@ -1,36 +1,54 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './assets/logo.png';
 import './App.css';
 import Commentaries from './components/Users';
-import Buildings from './components/Buildings';
-import Users from './components/Buildings';
+
+import Users from './components/Users';
 import Navbar from './components/Navbar';
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  menuButton,
-} from '@material-ui/core';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import AlertComponent from './components/AlertComponent';
+
+import FilterProperty from './components/FilterdProperty';
+
+import Property from './components/Property';
+import AddUser from './components/AddUser'
+
+import { BrowserRouter as Router, 
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  BrowserRouter} from 'react-router-dom';
 
 function App() {
-  return <Navbar />;
-  /*
-  return (
-    <Router>
-      <div className="container">
-        <h1>Todo bien</h1>
-        <hr />
-        <Switch>
-          <Route path="/login">Pagina de logueo</Route>
-          <Route path="/signin">Pagina de registro</Route>
-          <Route path="/">Pagina de inicio</Route>
-        </Switch>
-      </div>
-    </Router>
-  )
-  */
-}
+  const [title, updateTitle] = useState(null);
+  const [errorMessage, updateErrorMessage] = useState(null);
+  
+return (
+  <BrowserRouter>
+    <div>
+   
+      <Navbar  title={title}/>
+      <Redirect from="/" to="/" />
+      <Switch>
+        <Route path="/" exact={true} >
+          <Property  />
+          </Route>
 
+        <Route exact path="/users" >
+                <Users  showError={updateErrorMessage}  updateTitle={updateTitle}/> 
+          </Route>
+        <Route exact path="/signin">
+                    <AddUser showError={updateErrorMessage} updateTitle={updateTitle} />
+          </Route> 
+          <Route  path="/filterdproperty">
+                    <FilterProperty showError={updateErrorMessage} updateTitle={updateTitle} />
+          </Route> 
+         </Switch>
+      <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
+      
+    </div>
+  </BrowserRouter>
+);
+}
+  
 export default App;
