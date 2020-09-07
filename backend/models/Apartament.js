@@ -92,6 +92,9 @@ const ApartamentSchema = Schema({
         type: Schema.Types.ObjectId, 
         ref: 'User' 
     },
+    comments: [{
+        type: Array 
+    }],
 });
 
 //Creamos una metodo setImgUrl para almecenar las imagenes
