@@ -45,8 +45,7 @@ function MenuAppBar(props) {
 
   return (
     <div className={classes.root}>
-    
-      <FormGroup></FormGroup>
+        <FormGroup></FormGroup>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -57,10 +56,10 @@ function MenuAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-         
-          <Typography variant="h6" className={classes.title} >
+         <Typography variant="h6" className={classes.title} >
           <Link to="/" >RentApp</Link>
           </Typography>
+         
           {auth && (
             <div>
               <IconButton

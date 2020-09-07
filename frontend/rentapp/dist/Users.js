@@ -65,12 +65,12 @@ var useStyles = (0, _styles.makeStyles)(function (theme) {
     }
   };
 });
-var baseUrl = "http://localhost:3001/users";
+var baseUrl = 'http://localhost:3001/users';
 
 function Users(props) {
   var _useState = (0, _react.useState)({
-    user_name: "",
-    password: "",
+    user_name: '',
+    password: '',
     successMessage: null
   }),
       _useState2 = _slicedToArray(_useState, 2),
@@ -117,20 +117,20 @@ function Users(props) {
               }).then(function (response) {
                 return response.data;
               }).then(function (response) {
-                console.log(response); //if (response.status===200){
-
+                // console.log(response);
+                //if (response.status===200){
                 if (response.length > 0) {
                   setState(function (prevState) {
                     return _objectSpread(_objectSpread({}, prevState), {}, {
-                      'successMessage': 'Login successful. Redirecting to home page..'
+                      successMessage: 'Login successful. Redirecting to home page..'
                     });
                   });
                   redirectToHome();
                   props.showError(null);
                 } else if (response.code === 204) {
-                  props.showError("Username and password do not match");
+                  props.showError('Username and password do not match');
                 } else {
-                  props.showError("Username does not exists");
+                  props.showError('Username and password do not match');
                 }
               }).catch(function (error) {
                 console.log(error);
@@ -150,8 +150,8 @@ function Users(props) {
   }();
 
   var redirectToHome = function redirectToHome() {
-    props.history.push('/signin');
-    props.updateTitle('Signin');
+    props.history.push('/');
+    props.updateTitle('/');
   };
 
   var redirectToRegister = function redirectToRegister() {
