@@ -8,6 +8,9 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//Le estoy diciendo a express que la ruta /public haga referencia a /storage/imgs
+app.use('/public', express.static(`${__dirname}/storage/imgs`))
+
 
 //Todas las rutas que ingresen con /api, la va a gestionar apiRouter
 app.use('/api', apiRouter);
