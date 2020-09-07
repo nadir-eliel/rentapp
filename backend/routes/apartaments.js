@@ -36,6 +36,7 @@ router.get('/citys', async (req, res) => {
         return res.send(error.message);
     }
 });
+
 //Obtener un apartament
 router.get('/:idApartament', async(req, res) => {
     try{
@@ -69,6 +70,7 @@ router.post('/create', upload.array('photos', 5), async (req, res) => {
             comments_count: req.body.comments_count,
             create_at: req.body.create_at,
             update_at: req.body.update_at,
+            comments: req.body.comments
         });
 
         if(req.files){
@@ -80,7 +82,6 @@ router.post('/create', upload.array('photos', 5), async (req, res) => {
             //const {filename} = req.file;
             //apartament.setImgUrl(filename);
         }
-
         const savedApartament = await apartament.save();
         res.json(savedApartament);
     }
@@ -90,10 +91,21 @@ router.post('/create', upload.array('photos', 5), async (req, res) => {
 });
 
 //Actualizar apartament
-router.put('/:idApartament', async(req, res) => {
+router.put('/:idApartament', upload.array('photos', 5), async(req, res) => {
     try{
         //const apartament = await Apartament.findById(req.params.idApartament).exec();
         const apartament = await Apartament.findOne({_id:req.params.idApartament}).exec();
+        
+        if(req.files){
+            apartament.photos=[];
+            const photos = [];
+            const cantidad = req.files.length;
+            for(i=0; i<cantidad; i++){
+                const link = apartament.setImgUrl(req.files[i].filename);
+                photos.push(link);
+            }
+        }
+
         apartament.set(req.body);
         await apartament.save();
         res.json({success: 'SE ACTUALIZO CON EXITO!'});

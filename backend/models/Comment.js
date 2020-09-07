@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 
 var CommentSchema = Schema({
     comment: {
-        type: String
+        type: String,
+        require: true
     },
     created_at: {
         type : Date, 
@@ -18,11 +19,6 @@ var CommentSchema = Schema({
         type: Schema.Types.ObjectId, 
         ref: 'User' 
     },
-    apartament : {
-        type: Schema.Types.ObjectId, 
-        ref: 'Comment'
-    }
 });
-
 
 module.exports = mongoose.model('Comment', CommentSchema);

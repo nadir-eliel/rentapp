@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const { request, response } = require('express');
 const Comment = require('../models/Comment');
+const Apartament = require('../models/Apartament');
+const User = require('../models/User');
 
 
 //Obtener todos los comments
@@ -27,17 +29,20 @@ router.get('/:idComment', async(req, res) => {
 });
 
 //Crear un comment
-router.post('/create', async (req, res) => {
+router.post('/create/:idApartament/:idUser', async (req, res) => {
     try{
+        const apartament = await Apartament.findById(req.params.idApartament);
+        const user = await User.findById(req.params.idUser);
         const comment = new Comment({
             comment: req.body.comment,
-            user: req.body.user,
-            apartament: req.body.apartament,
             create_at: req.body.create_at,
             update_at: req.body.update_at
         });
+        comment.user = user;
         const savedComment = await comment.save();
-        res.json(savedComment);
+        await apartament.comments.push(savedComment);
+        apartament.save();
+        res.json(apartament);
     }
     catch(error){
         return res.json(error.message);
