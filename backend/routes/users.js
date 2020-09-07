@@ -15,6 +15,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+
 //Obtener un user
 router.get('/:idUser', async(req, res) => {
     try{
@@ -71,6 +72,7 @@ router.get('/logout', async(req, res) => {
 
 
 //Actualizar un user
+
 router.put('/:idUser', async(req, res) => {
     try{
         const user = await User.findOne({_id:req.params.idUser}).exec();
