@@ -124,9 +124,9 @@ ApartamentSchema.methods.setImgUrl = function setImgUrl(filename) {
    */
 
 //Eliminar un apartment
-router.delete("/:apartmentId", async (req, res) => {
+router.delete("/:idApartment", async (req, res) => {
   try {
-    await Apartment.deleteOne({ _id: req.params.apartmentId }).exec();
+    await Apartment.deleteOne({ _id: req.params.idApartment }).exec();
     res.json({ success: "SE ELIMINO CON EXITO!" });
   } catch (error) {
     return res.json(error.message);
