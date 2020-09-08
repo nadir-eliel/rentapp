@@ -3,6 +3,7 @@ var mongoose =  require('mongoose');
 var Schema = mongoose.Schema;
 
 var UserSchema = Schema({
+
     user_name: {
         type: String, 
         required: true, 
@@ -50,6 +51,7 @@ var UserSchema = Schema({
         type : Date, 
         default: Date.now 
     }
+
 });
 
 module.exports = mongoose.model('User', UserSchema);
