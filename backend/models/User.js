@@ -3,6 +3,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var UserSchema = Schema({
+
   user_name: {
     type: String,
     required: true,
@@ -54,6 +55,7 @@ var UserSchema = Schema({
 //Se agrega un método findByUserName, necesario para buscar por el atributo user_name
 UserSchema.static("findByUserName", function (userName) {
   return this.findOne({ user_name: userName });
+
 });
 
 module.exports = mongoose.model("User", UserSchema);
