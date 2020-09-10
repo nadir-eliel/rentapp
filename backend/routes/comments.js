@@ -28,20 +28,25 @@ router.get("/:idComment", async (req, res) => {
 //Crear un comment
 
 //revisar forma de post por pararms o por body
-router.post("/create/:idApartment/:idUser", async (req, res) => {
+router.post("/create/:idApartment/:userName", async (req, res) => {
   try {
     const apartment = await Apartment.findById(req.params.idApartment);
-    const user = await User.findById(req.params.idUser);
-    const comment = new Comment({
-      comment: req.body.comment,
-      create_at: req.body.create_at,
-      update_at: req.body.update_at,
-    });
-    comment.user = user;
-    const savedComment = await comment.save();
-    await apartment.comments.push(savedComment);
-    apartment.save();
-    res.json(apartment);
+    const user = await User.findByUserName(req.params.userName);
+    if (user != null) {
+      const comment = new Comment({
+        comment: req.body.comment,
+        create_at: req.body.create_at,
+        update_at: req.body.update_at,
+        user_name: req.params.userName,
+      });
+      comment.user = user;
+      const savedComment = await comment.save();
+      await apartment.comments.push(savedComment);
+      apartment.save();
+      res.json(apartment);
+    } else {
+      throw new Error("No se encuentra usuario " + req.params.userName);
+    }
   } catch (error) {
     return res.json(error.message);
   }
