@@ -15,6 +15,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+
 //Obtener un user
 router.get("/:idUser", async (req, res) => {
   try {
@@ -100,15 +101,17 @@ router.get("/logout", function (req, res) {
 });
 
 //Actualizar un user
-router.put("/:idUser", async (req, res) => {
-  try {
-    const user = await User.findOne({ _id: req.params.idUser }).exec();
-    user.set(req.body);
-    await user.save();
-    res.json({ success: "SE ACTUALIZO CON EXITO!" });
-  } catch (error) {
-    return res.json(error.message);
-  }
+
+router.put('/:idUser', async(req, res) => {
+    try{
+        const user = await User.findOne({_id:req.params.idUser}).exec();
+        user.set(req.body);
+        await user.save();
+        res.json({success: 'SE ACTUALIZO CON EXITO!'});
+    }
+    catch(error){
+        return res.json(error.message);
+    }
 });
 
 //Eliminar un user

@@ -64,7 +64,6 @@ router.put("/:idComment", async (req, res) => {
     return res.json(error.message);
   }
 });
-
 //Eliminar un comment
 router.delete("/:idComment", async (req, res) => {
   try {

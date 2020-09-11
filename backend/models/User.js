@@ -3,7 +3,9 @@ const bcrypt = require("bcrypt");
 
 const Schema = mongoose.Schema;
 
+
 const UserSchema = Schema({
+
   user_name: {
     type: String,
     required: true,
@@ -56,6 +58,7 @@ const UserSchema = Schema({
 //Se agrega un método findByUserName, necesario para buscar por el atributo user_name
 UserSchema.static("findByUserName", function (userName) {
   return this.findOne({ user_name: userName });
+
 });
 
 //Antes de guardar realiza un hash del String password y lo reemplaza por el ingresado por el usuario
