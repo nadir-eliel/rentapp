@@ -1,5 +1,5 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const { request, response } = require("express");
 const Comment = require("../models/Comment");
 const Apartment = require("../models/Apartment");
@@ -66,9 +66,9 @@ router.put("/:idComment", async (req, res) => {
 });
 
 //Eliminar un comment
-router.delete("/:commentId", async (req, res) => {
+router.delete("/:idComment", async (req, res) => {
   try {
-    await Comment.deleteOne({ _id: req.params.commentId }).exec();
+    await Comment.deleteOne({ _id: req.params.idComment }).exec();
     res.json({ success: "SE ELIMINO CON EXITO!" });
   } catch (error) {
     return res.json(error.message);

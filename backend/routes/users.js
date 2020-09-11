@@ -1,7 +1,9 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const { request, response } = require("express");
 const User = require("../models/User");
+const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
 //Obtener todos los users
 router.get("/", async (req, res) => {
@@ -24,8 +26,8 @@ router.get("/:idUser", async (req, res) => {
 });
 
 //Mostrar registro de user
-router.get("/signIn", async (req, res) => {
-  return res.send("VISTA PARA REGISTRARSE");
+router.get("/signIn", function (req, res, next) {
+  res.send("VISTA PARA REGISTRARSE");
 });
 
 //Registrar un user
@@ -52,16 +54,49 @@ router.post("/signIn", async (req, res) => {
 });
 
 //Mostrar login de user
-router.get("/login", async (req, res) => {
-  return res.send("VISTA PARA INGRESAR/LOGUEARSE");
+router.post("/login", async (req, res, next) => {
+  passport.authenticate("login", async (err, user, info) => {
+    try {
+      if (err || !user) {
+        console.log(err);
+        const error = new Error("new Error");
+        return next(error);
+      }
+
+      req.login(user, { session: false }, async (err) => {
+        if (err) return next(err);
+        const body = { _id: user._id, user_name: user.user_name };
+
+        const token = jwt.sign({ user: body }, "top_secret");
+        return res.json({ token });
+        //Este token debe guardarlo el usuario en localStorage (persistente) o SessionStore (se borra al cerrar el navegador)
+      });
+    } catch (e) {
+      return next(e);
+    }
+  })(req, res, next);
 });
-//Verificar si los datos ingresados existen
-router.post("/login", async (req, res) => {
-  return res.send("VERIFICA LAS CREDENCIALES");
-});
+
+//Verificar el perfil del usuario
+router.get(
+  "/profile",
+  passport.authenticate("jwt", { session: false }),
+  (req, res, next) => {
+    res.json({
+      message: "Datos:",
+      user: req.user,
+      token: req.query.secret_token,
+    });
+  }
+);
+
 //Para cerrar sesion
-router.get("/logout", async (req, res) => {
+/*router.get("/logout", async (req, res) => {
   return res.send("CIERRA LA SESION Y REDIRIGE");
+});*/
+router.get("/logout", function (req, res) {
+  req.logout();
+  res.redirect("/");
 });
 
 //Actualizar un user
@@ -77,9 +112,9 @@ router.put("/:idUser", async (req, res) => {
 });
 
 //Eliminar un user
-router.delete("/:userId", async (req, res) => {
+router.delete("/:idUser", async (req, res) => {
   try {
-    await User.deleteOne({ _id: req.params.userId }).exec();
+    await User.deleteOne({ _id: req.params.idUser }).exec();
     res.json({ success: "SE ELIMINO CON EXITO!" });
   } catch (error) {
     return res.json(error.message);
