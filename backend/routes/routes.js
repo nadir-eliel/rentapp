@@ -1,12 +1,14 @@
-var express = require('express');
-var router = express.Router();
-var apiApartaments = require('./apartaments');
-var apiUsers = require('./users');
-var apiComments = require('./comments');
+const express = require("express");
+const router = express.Router();
+const apiApartments = require("./apartments");
+const apiUsers = require("./users");
+const apiComments = require("./comments");
+const apiIndex = require("./index");
 
-//Todas las rutas que vengan con api/inmuebles las maneja apiInmuebles
-router.use('/apartaments', apiApartaments);
-router.use('/users', apiUsers);
-router.use('/comments', apiComments);
+//Todas las rutas que vengan con api/apartments las maneja apiApartments
+router.use("/apartments", apiApartments);
+router.use("/users", apiUsers);
+router.use("/comments", apiComments);
+router.use("/", apiIndex);
 
 module.exports = router;
