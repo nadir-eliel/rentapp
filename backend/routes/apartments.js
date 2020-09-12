@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-//Obtener todos las ciudades
+//Obtener todas las ciudades
 router.get("/cities", async (req, res) => {
   try {
     const salida = [];
@@ -39,7 +39,7 @@ router.get("/cities", async (req, res) => {
 router.get("/:idApartment", async (req, res) => {
   try {
     //const apartment = await Apartment.findOne({_id:req.params.idInmueble}).exec();
-    const apartment = await Apartment.findById(req.params.idapartment).exec();
+    const apartment = await Apartment.findById(req.params.idApartment).exec();
     res.json(apartment);
   } catch (error) {
     return res.send(error.message);

@@ -1,27 +1,30 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var UserSchema = Schema({
+
+const UserSchema = Schema({
 
   user_name: {
     type: String,
     required: true,
     uppercase: true,
+    unique: true,
   },
   name: {
     type: String,
-    required: true,
+    //required: true,
     uppercase: true,
   },
   surname: {
     type: String,
-    required: true,
+    //required: true,
     uppercase: true,
   },
   email: {
     type: String,
-    required: true,
+    //required: true,
     uppercase: true,
   },
   password: {
@@ -29,16 +32,16 @@ var UserSchema = Schema({
     required: true,
   },
   user_type: {
-    type: String,
-    required: true,
+    type: Number,
+    //required: true,
   },
   phone: {
     type: String,
-    required: true,
+    //required: true,
   },
   date_of_birth: {
     type: Date,
-    required: true,
+    //required: true,
   },
   photo: {
     type: String,
@@ -57,5 +60,19 @@ UserSchema.static("findByUserName", function (userName) {
   return this.findOne({ user_name: userName });
 
 });
+
+//Antes de guardar realiza un hash del String password y lo reemplaza por el ingresado por el usuario
+UserSchema.pre("save", async function (next) {
+  const hash = await bcrypt.hash(this.password, 10);
+  this.password = hash;
+  next();
+});
+
+//Compara si es válido el password
+UserSchema.methods.isValidPassword = async function (password) {
+  const user = this;
+  const compare = await bcrypt.compare(password, user.password);
+  return compare;
+};
 
 module.exports = mongoose.model("User", UserSchema);
