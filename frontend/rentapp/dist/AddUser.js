@@ -15,6 +15,12 @@ require("./AddUser.css");
 
 var _reactRouterDom = require("react-router-dom");
 
+var _Paper = _interopRequireDefault(require("@material-ui/core/Paper"));
+
+var _core = require("@material-ui/core");
+
+var _styles = require("@material-ui/core/styles");
+
 var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -45,27 +51,43 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var baseUrl = "http://localhost:3001/users";
+var useStyles = (0, _styles.makeStyles)(function (theme) {
+  return {
+    root: {
+      flexGrow: 1,
+      display: 'flex',
+      flexWrap: 'wrap'
+    },
+    paper: {
+      padding: theme.spacing(2),
+      margin: 'auto',
+      maxWidth: 400
+    }
+  };
+});
+var baseUrl = 'http://localhost:3001/users';
 
 function AddUser(props) {
   var _useState = (0, _react.useState)({
-    user_ID: "",
-    user_name: " ",
-    name: " ",
-    surname: " ",
-    user_type: "",
-    phone: "",
+    user_ID: '',
+    user_name: ' ',
+    name: ' ',
+    surname: ' ',
+    user_type: '',
+    phone: '',
     date_of_birth: Date,
-    created_at: "",
-    update_at: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    created_at: '',
+    update_at: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
     successMessage: null
   }),
       _useState2 = _slicedToArray(_useState, 2),
       state = _useState2[0],
       setState = _useState2[1];
+
+  var classes = useStyles();
 
   var handleChange = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
@@ -117,11 +139,11 @@ function AddUser(props) {
                 user_name: state.user_name,
                 name: state.name,
                 surname: state.surname,
-                user_type: "",
+                user_type: '',
                 phone: state.phone,
                 date_of_birth: state.date_of_birth,
-                created_at: "",
-                update_at: "",
+                created_at: '',
+                update_at: '',
                 email: state.email,
                 password: state.password
               };
@@ -130,7 +152,7 @@ function AddUser(props) {
                 if (response.status === 200) {
                   setState(function (prevState) {
                     return _objectSpread(_objectSpread({}, prevState), {}, {
-                      'successMessage': 'Registration successful. Redirecting to home page..'
+                      successMessage: 'Registration successful. Redirecting to home page..'
                     });
                   });
                   props.showError(null);
@@ -165,107 +187,154 @@ function AddUser(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "card col-12 col-lg-4 t-2 hv-center justify-content-center align-items-center container "
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "containerAddUsersSecundario"
-  }, /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "form-group text-left"
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "exampleImputUser"
-  }, "User Name:"), /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
-    className: "form-control",
+    className: classes.root
+  }, /*#__PURE__*/_react.default.createElement(_Paper.default, {
+    className: classes.paper
+  }, /*#__PURE__*/_react.default.createElement(_core.Grid, {
+    container: true,
+    spacing: 4,
+    justify: "center"
+  }, /*#__PURE__*/_react.default.createElement(_core.Grid, {
+    container: true,
+    direction: "column",
+    justify: "center",
+    alignItems: "center",
+    item: true,
+    md: 12
+  }, /*#__PURE__*/_react.default.createElement(_core.FormControl, null, /*#__PURE__*/_react.default.createElement(_core.InputLabel, {
+    htmlFor: "usuario"
+  }, "User Name:"), /*#__PURE__*/_react.default.createElement(_core.Input, {
     name: "user_name",
+    type: "usuario",
+    "arai-describedby": "usuario-helper",
     onChange: handleChange
-  })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "form-group text-left"
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "exampleImputName"
-  }, "Name:"), /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
-    className: "form-control",
+  }), /*#__PURE__*/_react.default.createElement(_core.FormHelperText, {
+    id: "usuario-helper"
+  }, "Ingrese un de nombre de Usuario."))), /*#__PURE__*/_react.default.createElement(_core.Grid, {
+    container: true,
+    direction: "column",
+    justify: "center",
+    alignItems: "center",
+    item: true,
+    md: 12
+  }, /*#__PURE__*/_react.default.createElement(_core.FormControl, null, /*#__PURE__*/_react.default.createElement(_core.InputLabel, {
+    htmlFor: "usuario"
+  }, "Name:"), /*#__PURE__*/_react.default.createElement(_core.Input, {
     name: "name",
-    onChange: handleChange
-  })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "form-group text-left"
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "exampleImputSurname"
-  }, "Surname:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
-    className: "form-control",
+    "arai-describedby": "name-helper",
+    onChange: handleChange
+  }), /*#__PURE__*/_react.default.createElement(_core.FormHelperText, {
+    id: "name-helper"
+  }, "Ingrese su nombre."))), /*#__PURE__*/_react.default.createElement(_core.Grid, {
+    container: true,
+    direction: "column",
+    justify: "center",
+    alignItems: "center",
+    item: true,
+    md: 12
+  }, /*#__PURE__*/_react.default.createElement(_core.FormControl, null, /*#__PURE__*/_react.default.createElement(_core.InputLabel, {
+    htmlFor: "usuario"
+  }, "Surname:"), /*#__PURE__*/_react.default.createElement(_core.Input, {
     name: "surname",
-    onChange: handleChange
-  })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "form-group text-left"
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "exampleInputEmail1"
-  }, "Email address:"), /*#__PURE__*/_react.default.createElement("input", {
-    type: "email",
-    className: "form-control",
-    name: "email",
-    "aria-describedby": "emailHelp",
-    placeholder: "Enter email",
-    onChange: handleChange
-  }), /*#__PURE__*/_react.default.createElement("small", {
-    id: "emailHelp",
-    className: "form-text text-muted"
-  }, "We'll never share your email with anyone else.")), /*#__PURE__*/_react.default.createElement("div", {
-    className: "form-group text-left"
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "exampleInputPassword1"
-  }, "Password:"), /*#__PURE__*/_react.default.createElement("input", {
-    type: "password",
-    className: "form-control",
-    name: "password",
-    placeholder: "Password",
-    onChange: handleChange
-  })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "form-group text-left"
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "exampleInputPassword1"
-  }, "Confirm Password:"), /*#__PURE__*/_react.default.createElement("input", {
-    type: "password",
-    className: "form-control",
-    name: "confirmPassword",
-    placeholder: "Confirm Password",
-    onChange: handleChange
-  })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "form-group text-left"
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "exampleImputName"
-  }, "ver user_type:")), /*#__PURE__*/_react.default.createElement("div", {
-    className: "form-group text-left"
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "exampleImputPhone"
-  }, "Phone:"), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
-    className: "form-control",
+    "arai-describedby": "surname-helper",
+    onChange: handleChange
+  }), /*#__PURE__*/_react.default.createElement(_core.FormHelperText, {
+    id: "surname-helper"
+  }, "Ingrese su Apellido."))), /*#__PURE__*/_react.default.createElement(_core.Grid, {
+    container: true,
+    direction: "column",
+    justify: "center",
+    alignItems: "center",
+    item: true,
+    md: 12
+  }, /*#__PURE__*/_react.default.createElement(_core.FormControl, null, /*#__PURE__*/_react.default.createElement(_core.InputLabel, {
+    htmlFor: "usuario"
+  }, "Email address:"), /*#__PURE__*/_react.default.createElement(_core.Input, {
+    name: "email",
+    type: "email",
+    "arai-describedby": "email-helper",
+    onChange: handleChange
+  }), /*#__PURE__*/_react.default.createElement(_core.FormHelperText, {
+    id: "email-helper"
+  }, "We'll never share your email with anyone else."))), /*#__PURE__*/_react.default.createElement(_core.Grid, {
+    container: true,
+    direction: "column",
+    justify: "center",
+    alignItems: "center",
+    item: true,
+    md: 12
+  }, /*#__PURE__*/_react.default.createElement(_core.FormControl, null, /*#__PURE__*/_react.default.createElement(_core.InputLabel, {
+    htmlFor: "usuario"
+  }, "Password:"), /*#__PURE__*/_react.default.createElement(_core.Input, {
+    name: "password",
+    type: "password",
+    "arai-describedby": "password-helper",
+    onChange: handleChange
+  }), /*#__PURE__*/_react.default.createElement(_core.FormHelperText, {
+    id: "password-helper"
+  }, "Ingrese un Password de 6 y 12 caracteres."))), /*#__PURE__*/_react.default.createElement(_core.Grid, {
+    container: true,
+    direction: "column",
+    justify: "center",
+    alignItems: "center",
+    item: true,
+    md: 12
+  }, /*#__PURE__*/_react.default.createElement(_core.FormControl, null, /*#__PURE__*/_react.default.createElement(_core.InputLabel, {
+    htmlFor: "usuario"
+  }, "Confirm Password:"), /*#__PURE__*/_react.default.createElement(_core.Input, {
+    name: "confirmPassword",
+    type: "password",
+    "arai-describedby": "confirmPassword-helper",
+    onChange: handleChange
+  }), /*#__PURE__*/_react.default.createElement(_core.FormHelperText, {
+    id: "confirmPassword-helper"
+  }, "Password wil remain unchanged if left blank."))), /*#__PURE__*/_react.default.createElement(_core.Grid, {
+    container: true,
+    direction: "column",
+    justify: "center",
+    alignItems: "center",
+    item: true,
+    md: 12
+  }, /*#__PURE__*/_react.default.createElement(_core.FormControl, null, /*#__PURE__*/_react.default.createElement(_core.InputLabel, {
+    htmlFor: "usuario"
+  }, "Phone:"), /*#__PURE__*/_react.default.createElement(_core.Input, {
     name: "phone",
+    type: "text",
+    "arai-describedby": "phone-helper",
     onChange: handleChange
-  })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "form-group text-left"
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "exampleImputDate"
-  }, "Date:"), /*#__PURE__*/_react.default.createElement("input", {
-    type: "Date",
-    className: "form-control",
+  }), /*#__PURE__*/_react.default.createElement(_core.FormHelperText, {
+    id: "phone-helper"
+  }, "Ingrese un telefono."))), /*#__PURE__*/_react.default.createElement(_core.Grid, {
+    container: true,
+    direction: "column",
+    justify: "center",
+    alignItems: "center",
+    item: true,
+    md: 12
+  }, /*#__PURE__*/_react.default.createElement(_core.FormControl, null, /*#__PURE__*/_react.default.createElement(_core.Input, {
     name: "date_of_birth",
+    type: "Date",
+    "arai-describedby": "date_of_birth-helper",
     onChange: handleChange
-  })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "form-group text-left"
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "exampleImputName"
-  }, "create_att ver:")), /*#__PURE__*/_react.default.createElement("div", {
-    className: "form-group text-left"
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "exampleImputName"
-  }, "update_at ver:")), /*#__PURE__*/_react.default.createElement("button", {
+  }), /*#__PURE__*/_react.default.createElement(_core.FormHelperText, {
+    id: "date_of_birth-helper"
+  }, "Ingrese la fecha de alta."))), /*#__PURE__*/_react.default.createElement(_core.Grid, {
+    container: true,
+    direction: "column",
+    justify: "center",
+    alignItems: "center",
+    item: true,
+    md: 12
+  }, /*#__PURE__*/_react.default.createElement(_core.Button, {
     type: "submit",
-    className: "btn btn-primary",
+    variant: "contained",
+    color: "primary",
     onClick: handleSubmitClick
-  }, "Register")), /*#__PURE__*/_react.default.createElement("div", {
+  }, "Register:"))), /*#__PURE__*/_react.default.createElement("div", {
     className: "mt-2"
-  }, /*#__PURE__*/_react.default.createElement("span", null, "Already have an account? "), /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement("span", null, "\xBFYa tiene una cuenta? "), /*#__PURE__*/_react.default.createElement("span", {
     className: "loginText",
     onClick: redirectToLogin
   }, "Login here"))));

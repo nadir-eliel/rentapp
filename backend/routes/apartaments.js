@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var upload = require('../libs/storage');
 var Apartament = require('../models/Apartament');
 
 //Obtener todos los apartaments
@@ -49,11 +50,13 @@ router.get('/:idApartament', async(req, res) => {
 });
 
 //Crear un apartament
-router.post('/create', async (req, res) => {
+router.post('/create', upload.array('photos', 5), async (req, res) => {
     try{
+        const photos = [];
         const apartament = new Apartament({
+            price: req.body.price,
             bathroom_count: req.body.bathroom_count,
-            bedroom_count: req.body.badroom_count,
+            bedroom_count: req.body.bedroom_count,
             room_count: req.body.room_count,
             other_details: req.body.other_details,
             garage: req.body.garage,
@@ -62,12 +65,23 @@ router.post('/create', async (req, res) => {
             backyard: req.body.backyard,
             pool: req.body.pool,
             address: req.body.address,
-            photos: req.body.photos,
             rates: req.body.rates,
             score_rate: req.body.score_rate,
+            comments_count: req.body.comments_count,
             create_at: req.body.create_at,
             update_at: req.body.update_at,
+            comments: req.body.comments
         });
+
+        if(req.files){
+            const cantidad = req.files.length;
+            for(i=0; i<cantidad; i++){
+                const link = apartament.setImgUrl(req.files[i].filename);
+                photos.push(link);
+            }
+            //const {filename} = req.file;
+            //apartament.setImgUrl(filename);
+        }
         const savedApartament = await apartament.save();
         res.json(savedApartament);
     }
@@ -77,10 +91,21 @@ router.post('/create', async (req, res) => {
 });
 
 //Actualizar apartament
-router.put('/:idApartament', async(req, res) => {
+router.put('/:idApartament', upload.array('photos', 5), async(req, res) => {
     try{
         //const apartament = await Apartament.findById(req.params.idApartament).exec();
         const apartament = await Apartament.findOne({_id:req.params.idApartament}).exec();
+        
+        if(req.files){
+            apartament.photos=[];
+            const photos = [];
+            const cantidad = req.files.length;
+            for(i=0; i<cantidad; i++){
+                const link = apartament.setImgUrl(req.files[i].filename);
+                photos.push(link);
+            }
+        }
+
         apartament.set(req.body);
         await apartament.save();
         res.json({success: 'SE ACTUALIZO CON EXITO!'});
