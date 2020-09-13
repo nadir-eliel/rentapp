@@ -94,10 +94,6 @@ router.get(
 /*router.get("/logout", async (req, res) => {
   return res.send("CIERRA LA SESION Y REDIRIGE");
 });*/
-router.get("/logout", function (req, res) {
-  req.logout();
-  res.redirect("/");
-});
 
 //Actualizar un user
 router.put("/:idUser", async (req, res) => {
