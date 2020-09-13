@@ -11,6 +11,36 @@ router.get("/", async (req, res) => {
   } catch (error) {
     return res.send(error.message);
   }
+
+  try {
+    const apartment = await Apartment.findBySearchbar(
+      req.body.city,
+      req.body.priceMin,
+      req.body.priceMax,
+      req.body.tipeA,
+      req.body.bedroom
+    ).exec();
+
+    res.json(apartment);
+  } catch (error) {
+    return res.send(error.message);
+  }
+});
+//Busqueda del searchbar
+
+router.get("/searchBar", async (req, res) => {
+  try {
+    const apartment = await Apartment.findBySearchbar(
+      req.body.city,
+      req.body.priceMin,
+      req.body.priceMax,
+      req.body.tipeA,
+      req.body.bedroom
+    ).exec();
+    res.json(apartment);
+  } catch (error) {
+    return res.send(error.message);
+  }
 });
 
 //Obtener todas las ciudades
@@ -52,6 +82,7 @@ router.post("/create", upload.array("photos", 5), async (req, res) => {
     const photos = [];
     const apartment = new Apartment({
       price: req.body.price,
+      type: req.body.type,
       bathroom_count: req.body.bathroom_count,
       bedroom_count: req.body.bedroom_count,
       room_count: req.body.room_count,
@@ -112,16 +143,8 @@ router.put("/:idApartment", upload.array("photos", 5), async (req, res) => {
     return res.json(error.message);
   }
 });
-/*
-Falta post /apartments/images
 
-
-//Creamos una metodo setImgUrl para almecenar las imagenes
-ApartamentSchema.methods.setImgUrl = function setImgUrl(filename) {
-   const port = config.port;
- const host = 'https://team5-rentapp.herokuapp.com';
-   this.photos.push(`${host}/public/${filename}`)
-   */
+//Falta post /apartments/images
 
 //Eliminar un apartment
 router.delete("/:idApartment", async (req, res) => {

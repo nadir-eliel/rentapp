@@ -14,17 +14,17 @@ const UserSchema = Schema({
   },
   name: {
     type: String,
-    //required: true,
+    required: true,
     uppercase: true,
   },
   surname: {
     type: String,
-    //required: true,
+    required: true,
     uppercase: true,
   },
   email: {
     type: String,
-    //required: true,
+    required: true,
     uppercase: true,
   },
   password: {
@@ -33,15 +33,15 @@ const UserSchema = Schema({
   },
   user_type: {
     type: Number,
-    //required: true,
+    required: true,
   },
   phone: {
     type: String,
-    //required: true,
+    required: true,
   },
   date_of_birth: {
     type: Date,
-    //required: true,
+    required: true,
   },
   photo: {
     type: String,

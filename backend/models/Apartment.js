@@ -12,6 +12,10 @@ const ApartmentSchema = Schema({
     type: Number,
     required: true,
   },
+  type: {
+    type: String,
+    required: true,
+  },
   bathroom_count: {
     type: Number,
     required: true,
@@ -100,7 +104,7 @@ const ApartmentSchema = Schema({
     },
   ],
 });
-
+/*
 //Creamos una metodo setImgUrl para almecenar las imagenes
 ApartmentSchema.methods.setImgUrl = function setImgUrl(filename) {
   const port = config.port;
@@ -108,6 +112,28 @@ ApartmentSchema.methods.setImgUrl = function setImgUrl(filename) {
   //this.photo = `${host}:${port}/public/${filename}`;
   this.photos.push(`${host}:${port}/public/${filename}`);
 };
+*/
+ApartmentSchema.methods.setImgUrl = function setImgUrl(filename) {
+  const port = config.port;
+  const host = "https://rentapp-imgs.s3-sa-east-1.amazonaws.com/img";
+  this.photos.push(`${host}/public/${filename}`);
+};
+
+//Se agrega un método findBySearchbar, necesario para buscar los Apartments a traves del searchbar
+ApartmentSchema.static("findBySearchbar", function (
+  city,
+  priceMin,
+  priceMax,
+  typeA,
+  bedroom
+) {
+  return this.find({
+    "address.city": city,
+    price: { $gte: priceMin, $lte: priceMax },
+    type: typeA,
+    bedroom_count: bedroom,
+  });
+});
 
 // Exportamos el modelo para usarlo en otros ficheros
 module.exports = mongoose.model("Apartment", ApartmentSchema);
