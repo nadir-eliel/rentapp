@@ -1,0 +1,15 @@
+.SearchProprtyBar {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.divSearch {
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: 'center';
+}
+
+.formControlSearch {
+  margin-left: 5;
+  minwidth: 170;
+}

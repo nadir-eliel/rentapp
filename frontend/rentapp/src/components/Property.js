@@ -1,29 +1,56 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropertyList from './PropertyList';
 import PropertySearchBar from './PropertySearchBar';
-import { withRouter } from "react-router-dom";
+import AddProperty from './AddProperty';
+import { withRouter } from 'react-router-dom';
+import AuthHelperMethods from '../services/AuthHelperMethods';
 
-import { BrowserRouter as Router, 
-  Switch,
-  Route,
-  useRouteMatch} from 'react-router-dom';
+const userHelper = new AuthHelperMethods();
 
-function Property()  {
-    
-  let { path, url } = useRouteMatch();
+class Property extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAdmin: false,
+      filter: undefined,
+      propertySelected: undefined,
+    };
+  }
 
- return (
-      <div>
-      <Switch>
-         <Route exact path={path}>
-             <PropertySearchBar />
-               <PropertyList />
-        </Route>
-      </Switch>
-        
+  setFilter = (dataFromChild) => {
+    this.setState({ filter: dataFromChild });
+  };
+
+  addProperty = () => {
+    return <AddProperty callbackFromParent={this.setFilter} />;
+  };
+
+  selectProperty = (id) => {
+    this.setState({ propertySelected: id });
+  };
+
+  mostrarVista() {
+    return (
+      <div className="propertyList">
+        <PropertySearchBar callbackFromParent={this.setFilter} />
+        {userHelper.loggedIn() && userHelper.getConfirm().user_name === 'ADMIN'
+          ? this.addProperty()
+          : ''}
+        <PropertyList
+          value={this.state.filter}
+          changeProperty={this.selectProperty}
+        />
       </div>
     );
   }
 
+  render() {
+    return (
+      <div className="Property">
+        <div className="mainView">{this.mostrarVista()}</div>
+      </div>
+    );
+  }
+}
 
-export default withRouter(Property)
+export default withRouter(Property);
