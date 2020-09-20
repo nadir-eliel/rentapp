@@ -11,65 +11,69 @@ import CommentIcon from '@material-ui/icons/Comment';
 import IconButton from '@material-ui/core/IconButton';
 import HotelIcon from '@material-ui/icons/Hotel';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-
+import Rating from './SimpleRating';
+import Divider from '@material-ui/core/Divider';
 import { Link, withRouter } from 'react-router-dom';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
-const useStyles = makeStyles({
-  card: {
-    maxWidth: 400,
-    padding: 5,
-    marginTop: 40,
-    marginLeft: 40,
-    marginRight: 40,
-  },
-  media: { height: 200 },
-});
+class PropertyCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedProperty: undefined,
+    };
+  }
 
-function PropertyCard({
-  id,
-  photo,
-  bathroom_count,
-  bedroom_count,
-  price,
-  other_property_details,
-  commentary_count,
-  valoration,
-}) {
-  const classes = useStyles();
+  handleSelectProperty(e) {
+    this.props.selectProperty(this.props.id);
+  }
 
-  return (
-    <Card className={classes.card}>
-      <Link to="/filterdproperty" >
-      <CardActionArea>
-        <CardMedia className={classes.media} image={photo} />
+  render() {
+    return (
+      <Card
+        style={{
+          maxWidth: 400,
+          padding: 5,
+          marginTop: 10,
+          marginLeft: 20,
+          marginRight: 20,
+          maxHeight: 380,
+        }}
+      >
+        <CardMedia image={this.props.photo} style={{ height: 160 }} />
         <CardContent>
-          <Typography gutterBottom variant="h6" component="h4">
-            {other_property_details}
+          <Typography variant="body2" color="textSecondary" component="p">
+            {this.props.other_property_details}
           </Typography>
-        </CardContent>{' '}
-      </CardActionArea>
-      <CardActions>
-        <IconButton aria-label="Comentarios">
-          <CommentIcon />
-          {commentary_count}
-        </IconButton>
-        <IconButton aria-label="Valoracion">
-          <GradeIcon />
-          {valoration}
-        </IconButton>
-        <IconButton aria-label=" Comentarios">
-          <HotelIcon />
-          {bedroom_count}
-        </IconButton>
-        <IconButton aria-label=" Comentarios">
-          <AttachMoneyIcon />
-          {price}
-        </IconButton>
-      </CardActions>
-      </Link>
-    </Card>
-  );
+          <div fontSize="small">
+            <IconButton fontSize="small" aria-label="Comentarios">
+              <CommentIcon fontSize="small" />
+              {this.props.commentary_count}
+            </IconButton>
+            <IconButton aria-label="Valoracion">
+              <GradeIcon fontSize="small" />
+              {this.props.valoration}
+            </IconButton>
+            <IconButton aria-label=" Comentarios">
+              <HotelIcon fontSize="small" />
+              {this.props.bedroom_count}
+            </IconButton>
+            <IconButton aria-label=" Comentarios">
+              <AttachMoneyIcon fontSize="small" />
+              {this.props.price}
+            </IconButton>
+          </div>
+          <Divider variant="middle" />
+          {/*<Rating />*/}
+        </CardContent>
+        <CardActionArea>
+          <IconButton onClick={this.handleSelectProperty.bind(this)}>
+            <VisibilityIcon fontSize="small" />
+          </IconButton>
+        </CardActionArea>
+      </Card>
+    );
+  }
 }
-
 
 export default withRouter(PropertyCard);

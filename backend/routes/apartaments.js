@@ -4,7 +4,7 @@ var upload = require('../libs/storage');
 var Apartament = require('../models/Apartament');
 
 //Obtener todos los apartaments
-router.get('/apart', async (req, res) => {
+router.get('/', async (req, res) => {
     try{
         const apartaments = await Apartament.find().exec();
         res.json(apartaments);
@@ -126,4 +126,5 @@ router.delete('/:apartamentId', async(req, res) => {
         return res.json(error.message)
     }
 });
+
 module.exports = router;

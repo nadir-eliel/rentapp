@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import '../components/Users.css';
-import { withRouter } from 'react-router-dom';
-import axios from 'axios';
-import md5 from 'md5';
+import React, { Component, useState } from 'react';
+import '../styles/Users.css';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import isAuthenticated from '../lib/isAuthenticated';
+import { Redirect, Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import AuthHelperMethods from '../services/AuthHelperMethods';
 
 import {
-  Container,
   FormControl,
   InputLabel,
   Input,
@@ -13,10 +16,8 @@ import {
   Button,
   Grid,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = (theme) => ({
   root: {
     flexGrow: 1,
     display: 'flex',
@@ -27,133 +28,147 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto',
     maxWidth: 400,
   },
-}));
-const baseUrl = 'http://localhost:3001/users';
+});
+class Users extends Component {
+  Auth = new AuthHelperMethods();
 
-function Users(props) {
-  const [state, setState] = useState({
+  state = {
+    loggedin: isAuthenticated(),
     user_name: '',
     password: '',
-    successMessage: null,
-  });
+    successMessage: '',
+  };
 
-  const classes = useStyles();
-
-  const handleChange = async (event) => {
-    await setState({
-      ...state,
-      [event.target.name]: event.target.value,
+  onChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
     });
   };
 
-  const login = async (event) => {
-    event.preventDefault();
-    await axios
-      .get(baseUrl, {
-        params: { user_name: state.user_name, password: md5(state.password) },
-      })
-      .then((response) => {
-        return response.data;
-      })
-
-      .then((response) => {
-        // console.log(response);
-        //if (response.status===200){
-        if (response.length > 0) {
-          setState((prevState) => ({
-            ...prevState,
-            successMessage: 'Login successful. Redirecting to home page..',
-          }));
-          redirectToHome();
-          props.showError(null);
-        } else if (response.code === 204) {
-          props.showError('Username and password do not match');
-        } else {
-          props.showError('Username and password do not match');
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    /* Here is where all the login logic will go. Upon clicking the login button, we would like to utilize a login method that will send our entered credentials over to the server for verification. Once verified, it should store your token and send you to the protected route. */
+    this.Auth.login(this.state.user_name, this.state.password)
+      .then((res) => {
+        if (res === false) {
+          return alert("Sorry those credentials don't exist!");
         }
+        this.props.history.replace('/');
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        alert(err);
       });
   };
 
-  const redirectToHome = () => {
-    props.history.push('/');
-    props.updateTitle('/');
-  };
+  componentWillMount() {
+    /* Here is a great place to redirect someone who is already logged in to the protected route */
+    if (this.Auth.loggedIn()) this.props.history.replace('/');
+  }
 
-  const redirectToRegister = () => {
-    props.history.push('/signin');
-    props.updateTitle('Signin');
-  };
-
-  return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <Grid container spacing={4} justify="center">
-          <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-            item
-            md={12}
-          >
-            <FormControl>
-              <InputLabel htmlFor="usuario">Usuario:</InputLabel>
-              <Input
-                name="user_name"
-                type="usuario"
-                arai-describedby="usuario-helper"
-                onChange={handleChange}
-              />
-              <FormHelperText id="usuario-helper">
-                Ingrese su nombre de Usuario
-              </FormHelperText>
-            </FormControl>
-          </Grid>
-          <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-            item
-            md={12}
-          >
-            <FormControl>
-              <InputLabel htmlFor="pwd">Password</InputLabel>
-              <Input
-                name="password"
-                type="password"
-                arai-describedby="password-helper"
-                onChange={handleChange}
-              />
-              <FormHelperText id="password-helper">
-                Ingrese su Password
-              </FormHelperText>
-            </FormControl>
-          </Grid>
-          <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-            item
-            md={12}
-          >
-            <Button variant="contained" color="primary" onClick={login}>
-              Iniciar Sesión
-            </Button>
-          </Grid>
-        </Grid>
-        <div className="registerMessage">
-          <span>¿No tengo una cuenta? </span>
-          <span className="loginText" onClick={redirectToRegister}>
-            Registrese
-          </span>
+  render() {
+    const { classes } = this.props;
+    const { user_name, password, successMessage } = this.state;
+    if (this.state.loggedin && this.state.loggedin !== '') {
+      return (
+        <Redirect
+          to={{
+            pathname: '/',
+          }}
+        />
+      );
+    } else {
+      return (
+        <div className={classes.root}>
+          <form className={classes.paper}>
+            {successMessage !== '' && (
+              <div
+                className="alert alert-warning alert-dismissible"
+                role="alert"
+              >
+                {successMessage}
+              </div>
+            )}
+            <Paper className={classes.paper}>
+              <Grid container spacing={4} justify="center">
+                <Grid
+                  container
+                  direction="column"
+                  justify="center"
+                  alignItems="center"
+                  item
+                  md={12}
+                >
+                  <FormControl>
+                    <InputLabel htmlFor="input-with-icon-adornment">
+                      Usuario:
+                    </InputLabel>
+                    <Input
+                      id="input-with-icon-adornment"
+                      name="user_name"
+                      type="usuario"
+                      arai-describedby="usuario-helper"
+                      value={user_name}
+                      onChange={this.onChange}
+                      startAdornment={
+                        <InputAdornment position="start">
+                          <AccountCircle />
+                        </InputAdornment>
+                      }
+                    />
+                    <FormHelperText id="usuario-helper">
+                      Ingrese su nombre de Usuario
+                    </FormHelperText>
+                  </FormControl>
+                </Grid>
+                <Grid
+                  container
+                  direction="column"
+                  justify="center"
+                  alignItems="center"
+                  item
+                  md={12}
+                >
+                  <FormControl>
+                    <InputLabel htmlFor="pwd">Password</InputLabel>
+                    <Input
+                      name="password"
+                      type="password"
+                      arai-describedby="password-helper"
+                      value={password}
+                      onChange={this.onChange}
+                    />
+                    <FormHelperText id="password-helper">
+                      Ingrese su Password
+                    </FormHelperText>
+                  </FormControl>
+                </Grid>
+                <Grid
+                  container
+                  direction="column"
+                  justify="center"
+                  alignItems="center"
+                  item
+                  md={12}
+                >
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.handleFormSubmit}
+                  >
+                    Iniciar Sesión
+                  </Button>
+                </Grid>
+              </Grid>
+              <div className="registerMessage">
+                <span>¿No tengo una cuenta? </span>
+                <Link to="/signin">Registrate</Link>;
+              </div>
+            </Paper>
+          </form>
         </div>
-      </Paper>
-    </div>
-  );
+      );
+    }
+  }
 }
-export default withRouter(Users);
+
+export default withStyles(useStyles, { withTheme: true })(Users);

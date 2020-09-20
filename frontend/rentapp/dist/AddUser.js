@@ -9,8 +9,6 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _AddUserForm = _interopRequireDefault(require("./AddUserForm"));
-
 require("./AddUser.css");
 
 var _reactRouterDom = require("react-router-dom");

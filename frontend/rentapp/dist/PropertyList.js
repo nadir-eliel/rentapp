@@ -1,13 +1,11 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
 var _Grid = _interopRequireDefault(require("@material-ui/core/Grid"));
 
@@ -17,232 +15,237 @@ var _reactRouterDom = require("react-router-dom");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 //import UploadImagen from './UploadImage';
-function PropertyList() {
-  var _useState = (0, _react.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      properties = _useState2[0],
-      setProperties = _useState2[1];
+function getPropertiesAsync(_x, _x2, _x3, _x4, _x5) {
+  return _getPropertiesAsync.apply(this, arguments);
+}
 
-  (0, _react.useEffect)(function () {
-    function fetchData() {
-      return _fetchData.apply(this, arguments);
-    }
+function _getPropertiesAsync() {
+  _getPropertiesAsync = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(city, priceMin, priceMax, tipeA, bedroom) {
+    var response, data;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return fetch('http://localhost:4000/api/apartments/', {
+              method: 'GET',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+              },
+              params: {
+                city: city,
+                priceMin: priceMin,
+                priceMax: priceMax,
+                tipeA: tipeA,
+                bedroom: bedroom
+              }
+            });
 
-    function _fetchData() {
-      _fetchData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+          case 2:
+            response = _context3.sent;
+            data = response.json();
+            return _context3.abrupt("return", data);
+
+          case 5:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _getPropertiesAsync.apply(this, arguments);
+}
+
+function getPromedio(rates) {
+  var promedy = 0;
+
+  if (rates.length > 0) {
+    var val = rates.map(function (rate) {
+      return rate.rate;
+    });
+    var count = val.length;
+    var values = val.reduce(function (previous, current) {
+      return current += previous;
+    });
+    promedy = Math.round((values /= count) * 10) / 10;
+  }
+
+  return promedy;
+}
+
+var PropertyList = /*#__PURE__*/function (_React$Component) {
+  _inherits(PropertyList, _React$Component);
+
+  var _super = _createSuper(PropertyList);
+
+  function PropertyList(props) {
+    var _this;
+
+    _classCallCheck(this, PropertyList);
+
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "ChangeSelectedProperty", function (a) {
+      _this.setState({
+        selectedProperty: a
+      });
+    });
+
+    _this.state = {
+      filters: undefined,
+      properties: [],
+      selectedProperty: undefined
+    };
+    return _this;
+  }
+
+  _createClass(PropertyList, [{
+    key: "componentDidMount",
+    value: function () {
+      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var dataProperties;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                setProperties(
-                /*await fetch('https://reqres.in/api/users?per_page=12')
-                  .then((res) => res.json())
-                  .then((res) => res.data)*/
-                data.properties);
+                _context.next = 2;
+                return getPropertiesAsync();
 
-              case 1:
+              case 2:
+                dataProperties = _context.sent;
+                this.setState({
+                  properties: dataProperties
+                });
+
+              case 4:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, this);
       }));
-      return _fetchData.apply(this, arguments);
+
+      function componentDidMount() {
+        return _componentDidMount.apply(this, arguments);
+      }
+
+      return componentDidMount;
+    }()
+  }, {
+    key: "componentWillReceiveProps",
+    value: function () {
+      var _componentWillReceiveProps = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(nextProps) {
+        var dataProperties;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                this.setState({
+                  filters: nextProps.value
+                });
+                _context2.next = 3;
+                return getPropertiesAsync(nextProps.value.city, nextProps.value.priceMin, nextProps.value.priceMax, nextProps.value.tipeA, nextProps.value.bedroom);
+
+              case 3:
+                dataProperties = _context2.sent;
+                console.log(dataProperties);
+                this.setState({
+                  properties: dataProperties
+                });
+
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function componentWillReceiveProps(_x6) {
+        return _componentWillReceiveProps.apply(this, arguments);
+      }
+
+      return componentWillReceiveProps;
+    }()
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      if (this.state.selectedProperty !== undefined) this.props.changeProperty(this.state.selectedProperty);
+      /*
+      if (this. !== undefined) {
+        return (
+          <Redirect
+            to={'/filteredProperty/' + this.state.redirectProperty}
+          ></Redirect>
+        );
+      }*/
+
+      return /*#__PURE__*/_react.default.createElement("div", {
+        className: "property-list"
+      }, /*#__PURE__*/_react.default.createElement(_Grid.default, {
+        container: true,
+        spacing: 5,
+        style: {
+          marginTop: 10
+        }
+      }, this.state.properties.map(function (property) {
+        return /*#__PURE__*/_react.default.createElement(_Grid.default, {
+          key: property._id,
+          item: true,
+          itemxs: 12,
+          sm: 6,
+          md: 4,
+          lg: 4,
+          xl: 3
+        }, /*#__PURE__*/_react.default.createElement(_PropertyCard.default, {
+          key: property._id + '',
+          id: property._id,
+          photo: property.photos[0],
+          bathroom_count: property.bathroom_count,
+          bedroom_count: property.bedroom_count,
+          commentary_count: property.comments.length,
+          valoration: getPromedio(property.rates),
+          price: property.price,
+          other_property_details: property.other_details ? property.other_details.substring(0, 100) + '...' : '',
+          selectProperty: _this2.ChangeSelectedProperty
+        }));
+      })));
     }
+  }]);
 
-    fetchData();
-  }, []);
-  var data = {
-    offset: 0,
-    size: 0,
-    properties: [{
-      id: 'd290f1ee-6c54-4b01-90e6-d701748f0851',
-      user_id: 'd290f1ee-6c54-4b01-90e6-d701748f0851',
-      photos: ['https://www.thehousedesigners.com/house-plans/images/AdvSearch2-7263.jpg'],
-      bathroom_count: 2,
-      bedroom_count: 2,
-      garage: true,
-      backyard: false,
-      pets: true,
-      kids: true,
-      room_count: 4,
-      other_building_details: 'Luminoso, excelente ubicación, admite mascotas y niños.',
-      address: {
-        province: 'Neuquén',
-        city: 'San Martín de los Andes',
-        street_number: 'Belgrano 125'
-      }
-    }, {
-      id: 'd290f1ee-6c54-4b01-90e6-d701748f0852',
-      user_id: 'd290f1ee-6c54-4b01-90e6-d701748f0852',
-      photos: ['https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/suburban-house-royalty-free-image-1584972559.jpg'],
-      bathroom_count: 2,
-      bedroom_count: 3,
-      garage: true,
-      backyard: true,
-      pets: true,
-      kids: false,
-      room_count: 2,
-      other_building_details: 'Varios ambientes, patio grande y comedor espacioso',
-      address: {
-        province: 'Neuquén',
-        city: 'Centenario',
-        street_number: 'Honduras 191'
-      }
-    }, {
-      id: 'd290f1ee-6c54-4b01-90e6-d701748f0853',
-      user_id: 'd290f1ee-6c54-4b01-90e6-d701748f0853',
-      photos: ['https://arc-anglerfish-arc2-prod-infobae.s3.amazonaws.com/public/X7MEAFG6FNECVOWVTM3WYC555Q.jpg'],
-      bathroom_count: 2,
-      bedroom_count: 2,
-      garage: true,
-      backyard: true,
-      pets: true,
-      kids: true,
-      room_count: 4,
-      other_building_details: 'Mansion grande, digna de un sicario de la mafia italiana',
-      address: {
-        province: 'Salta',
-        city: 'Salta',
-        street_number: 'Portugal 125'
-      }
-    }, {
-      id: 'd290f1ee-6c54-4b01-90e6-d701748f0854',
-      user_id: 'd290f1ee-6c54-4b01-90e6-d701748f0854',
-      photos: ['https://s04.s3c.es/imag/_v0/770x420/7/d/7/600x400_Casa-de-los-simpson.png'],
-      bathroom_count: 4,
-      bedroom_count: 1,
-      garage: true,
-      backyard: true,
-      pets: true,
-      kids: true,
-      room_count: 4,
-      other_building_details: 'Ex casa de familia de tez amarilla mediaticamente conocida.',
-      address: {
-        province: 'Tierra del Fuego',
-        city: 'Springfield',
-        street_number: 'Av. Siempre Viva 123'
-      }
-    }, {
-      id: 'd290f1ee-6c54-4b01-90e6-d701748f0855',
-      user_id: 'd290f1ee-6c54-4b01-90e6-d701748f0855',
-      photos: ['https://pbs.twimg.com/media/DsONJkrXgAAoivG.jpg'],
-      bathroom_count: 10,
-      bedroom_count: 5,
-      garage: false,
-      backyard: true,
-      pets: true,
-      kids: true,
-      room_count: 12,
-      other_building_details: 'Ubicada en el medio de la selva, ideal cazador furtivo',
-      address: {
-        province: 'Chaco',
-        city: 'Selva Oeste',
-        street_number: 'A la vuelta del quito tronco 612'
-      }
-    }, {
-      id: 'd290f1ee-6c54-4b01-90e6-d701748f0856',
-      user_id: 'd290f1ee-6c54-4b01-90e6-d701748f0856',
-      photos: ['https://www.travelreport.mx/wp-content/uploads/2018/12/tuneles-chinos-en-mexicali-cuarto.jpg'],
-      bathroom_count: 1,
-      bedroom_count: 1,
-      garage: false,
-      backyard: false,
-      pets: false,
-      kids: false,
-      room_count: 1,
-      other_building_details: 'Cuarto bajo tierra, clandestina, completamente inhumano. Buen precio',
-      address: {
-        province: 'Buenos Aires',
-        city: 'Estacion Constituyentes',
-        street_number: 'Subte linea B'
-      }
-    }, {
-      id: 'd290f1ee-6c54-4b01-90e6-d701748f0857',
-      user_id: 'd290f1ee-6c54-4b01-90e6-d701748f0857',
-      photos: ['https://i.pinimg.com/736x/ef/74/8f/ef748f319ff248216cefb4fbcf0c1699.jpg'],
-      bathroom_count: 2,
-      bedroom_count: 2,
-      garage: true,
-      backyard: true,
-      pets: true,
-      kids: true,
-      room_count: 4,
-      other_building_details: 'Ubicada a 623 mts de altura, sin elevador ni electricidad, excelente vista',
-      address: {
-        province: 'Salta',
-        city: 'Arbolandia',
-        street_number: 'Roble 1'
-      }
-    },, {
-      id: 'd290f1ee-6c54-4b01-90e6-d701748f0857',
-      user_id: 'd290f1ee-6c54-4b01-90e6-d701748f0857',
-      photos: ['https://laopinion.com/wp-content/uploads/sites/3/2020/03/casa-cueva-bisbee-arizona.jpg?quality=80&strip=all&w=940'],
-      bathroom_count: 2,
-      bedroom_count: 2,
-      garage: true,
-      backyard: true,
-      pets: true,
-      kids: true,
-      room_count: 4,
-      other_building_details: 'Casa debajo una cueva, tallada a mano con un destornillador de punta philips',
-      address: {
-        province: 'Santa Cruz',
-        city: 'Cavernas de la Luz',
-        street_number: 'Quinta cueva'
-      }
-    }]
-  };
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "property-list"
-  }, /*#__PURE__*/_react.default.createElement(_Grid.default, {
-    container: true,
-    spacing: 5,
-    style: {
-      padding: '24px'
-    }
-  }, console.log(properties), properties.map(function (property) {
-    return /*#__PURE__*/_react.default.createElement(_Grid.default, {
-      key: property.id,
-      itemxs: 12,
-      sm: 6,
-      md: 4,
-      lg: 4,
-      xl: 3
-    }, /*#__PURE__*/_react.default.createElement(_PropertyCard.default, {
-      key: property.id,
-      photo: property.photos[0],
-      bathroom_count: property.bathroom_count,
-      bedroom_count: property.bedroom_count,
-      commentary_count: Math.floor(Math.random() * 5) + 1,
-      valoration: 3.2,
-      price: Math.floor(Math.random() * 17505) + 1,
-      other_property_details: property.other_building_details
-    }));
-  })));
-}
+  return PropertyList;
+}(_react.default.Component);
 
-var _default = (0, _reactRouterDom.withRouter)(PropertyList);
-
-exports.default = _default;
+exports.default = PropertyList;

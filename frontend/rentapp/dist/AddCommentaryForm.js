@@ -7,6 +7,14 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _Send = _interopRequireDefault(require("@material-ui/icons/Send"));
+
+var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
+
+var _moment = _interopRequireDefault(require("moment"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -44,17 +52,74 @@ var AddCommentaryForm = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, AddCommentaryForm);
 
     _this = _super.call(this, props);
-    _this.state = {};
+    _this.state = {
+      user_id: undefined,
+      comment: undefined
+    };
     return _this;
   }
 
   _createClass(AddCommentaryForm, [{
+    key: "handleChangeText",
+    value: function handleChangeText(e) {
+      this.setState({
+        texto: e.target.value
+      });
+    }
+  }, {
+    key: "handleClickEnviar",
+    value: function handleClickEnviar(e) {
+      var newComment = {
+        apartment_id: this.props.apartmentId,
+        user_id: this.state.user_id,
+        comment: this.state.comment,
+        created_at: 1,
+        updated_at: 1
+      }; //codigo para enviar el comentario
+    }
+  }, {
     key: "render",
     value: function render() {
-      return;
-
-      /*#__PURE__*/
-      _react.default.createElement("div", null, "\"AddCommentaryForm\"");
+      return /*#__PURE__*/_react.default.createElement("div", {
+        className: "addCommentary"
+      }, /*#__PURE__*/_react.default.createElement("form", {
+        onSubmit: this.addComment
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "field",
+        style: {
+          marginLeft: 10
+        }
+      }), /*#__PURE__*/_react.default.createElement("div", {
+        className: "field"
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "control",
+        style: {
+          marginLeft: 20,
+          width: 400
+        }
+      }, /*#__PURE__*/_react.default.createElement("textarea", {
+        style: {
+          minHeight: 80
+        },
+        value: this.state.texto,
+        className: "textarea",
+        name: "comment",
+        placeholder: "Agregar un comentario",
+        onChange: this.handleChangeText.bind(this)
+      }))), /*#__PURE__*/_react.default.createElement("div", {
+        className: "field"
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "control"
+      }, /*#__PURE__*/_react.default.createElement(_Button.default, {
+        style: {
+          marginLeft: 20,
+          marginTop: 10
+        },
+        variant: "contained",
+        color: "primary",
+        onClick: this.handleClickEnviar.bind(this),
+        endIcon: /*#__PURE__*/_react.default.createElement(_Send.default, null, "ENVIAR")
+      }, "ENVIAR")))));
     }
   }]);
 

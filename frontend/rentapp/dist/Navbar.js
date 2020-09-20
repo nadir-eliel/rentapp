@@ -17,21 +17,21 @@ var _Typography = _interopRequireDefault(require("@material-ui/core/Typography")
 
 var _IconButton = _interopRequireDefault(require("@material-ui/core/IconButton"));
 
-var _Menu = _interopRequireDefault(require("@material-ui/icons/Menu"));
-
 var _AccountCircle = _interopRequireDefault(require("@material-ui/icons/AccountCircle"));
 
 var _Switch = _interopRequireDefault(require("@material-ui/core/Switch"));
-
-var _FormControlLabel = _interopRequireDefault(require("@material-ui/core/FormControlLabel"));
 
 var _FormGroup = _interopRequireDefault(require("@material-ui/core/FormGroup"));
 
 var _MenuItem = _interopRequireDefault(require("@material-ui/core/MenuItem"));
 
-var _Menu2 = _interopRequireDefault(require("@material-ui/core/Menu"));
+var _Menu = _interopRequireDefault(require("@material-ui/core/Menu"));
 
 var _reactRouterDom = require("react-router-dom");
+
+var _logo = _interopRequireDefault(require("../img/logo.png"));
+
+var _AuthHelperMethods = _interopRequireDefault(require("../services/AuthHelperMethods"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -75,6 +75,7 @@ function MenuAppBar(props) {
       setAnchorEl = _React$useState4[1];
 
   var open = Boolean(anchorEl);
+  var userHelper = new _AuthHelperMethods.default();
 
   var handleChange = function handleChange(event) {
     setAuth(event.target.checked);
@@ -88,27 +89,40 @@ function MenuAppBar(props) {
     setAnchorEl(null);
   };
 
+  var handleLogOut = function handleLogOut() {
+    userHelper.logout();
+  };
+
+  function showLogOut() {
+    return /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+      to: "/",
+      className: "link",
+      onClick: handleLogOut
+    }, /*#__PURE__*/_react.default.createElement(_MenuItem.default, null, "Log Out"), ' ');
+  }
+
   return /*#__PURE__*/_react.default.createElement("div", {
     className: classes.root
   }, /*#__PURE__*/_react.default.createElement(_FormGroup.default, null), /*#__PURE__*/_react.default.createElement(_AppBar.default, {
     position: "static"
-  }, /*#__PURE__*/_react.default.createElement(_Toolbar.default, null, /*#__PURE__*/_react.default.createElement(_IconButton.default, {
-    edge: "start",
-    className: classes.menuButton,
-    color: "inherit",
-    "aria-label": "menu"
-  }, /*#__PURE__*/_react.default.createElement(_Menu.default, null)), /*#__PURE__*/_react.default.createElement(_Typography.default, {
+  }, /*#__PURE__*/_react.default.createElement(_Toolbar.default, null, /*#__PURE__*/_react.default.createElement(_Typography.default, {
     variant: "h6",
     className: classes.title
   }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/"
-  }, "RentApp")), auth && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_IconButton.default, {
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    style: {
+      maxWidth: 160
+    },
+    src: _logo.default,
+    alt: "logo"
+  }))), auth && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_IconButton.default, {
     "aria-label": "account of current user",
     "aria-controls": "menu-appbar",
     "aria-haspopup": "true",
     onClick: handleMenu,
     color: "inherit"
-  }, /*#__PURE__*/_react.default.createElement(_AccountCircle.default, null)), /*#__PURE__*/_react.default.createElement(_Menu2.default, {
+  }, /*#__PURE__*/_react.default.createElement(_AccountCircle.default, null)), userHelper.loggedIn() ? userHelper.getConfirm().user.user_name : '', /*#__PURE__*/_react.default.createElement(_Menu.default, {
     id: "menu-appbar",
     anchorEl: anchorEl,
     anchorOrigin: {
@@ -123,14 +137,14 @@ function MenuAppBar(props) {
     open: open,
     onClose: handleClose
   }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/users",
+    to: "/login",
     className: "link",
     onClick: handleClose
-  }, /*#__PURE__*/_react.default.createElement(_MenuItem.default, null, "Login"), "   "), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  }, /*#__PURE__*/_react.default.createElement(_MenuItem.default, null, "Login"), ' '), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/signin",
     className: "link",
     onClick: handleClose
-  }, /*#__PURE__*/_react.default.createElement(_MenuItem.default, null, "Sign In"), "  "))))));
+  }, /*#__PURE__*/_react.default.createElement(_MenuItem.default, null, "Sign In"), ' '), userHelper.loggedIn() ? showLogOut() : '')))));
 }
 
 var _default = (0, _reactRouterDom.withRouter)(MenuAppBar);

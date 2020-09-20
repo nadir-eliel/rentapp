@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _styles = require("@material-ui/core/styles");
-
 var _InputLabel = _interopRequireDefault(require("@material-ui/core/InputLabel"));
 
 var _MenuItem = _interopRequireDefault(require("@material-ui/core/MenuItem"));
@@ -27,166 +25,258 @@ var _reactRouterDom = require("react-router-dom");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var useStyles = (0, _styles.makeStyles)(function (theme) {
-  return {
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 170
-    },
-    TextField: {
-      margin: theme.spacing(1)
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2)
-    },
-    button: {
-      margin: theme.spacing(2)
-    },
-    divSearch: {
-      display: 'flex-wrap',
-      alignItems: 'center',
-      justifyContent: 'center'
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function getCitiesAsync() {
+  return _getCitiesAsync.apply(this, arguments);
+}
+
+function _getCitiesAsync() {
+  _getCitiesAsync = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+    var response, data;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return fetch('http://localhost:4000/api/apartments/cities');
+
+          case 2:
+            response = _context2.sent;
+            data = response.json();
+            return _context2.abrupt("return", data);
+
+          case 5:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _getCitiesAsync.apply(this, arguments);
+}
+
+var PropertySearchBar = /*#__PURE__*/function (_React$Component) {
+  _inherits(PropertySearchBar, _React$Component);
+
+  var _super = _createSuper(PropertySearchBar);
+
+  function PropertySearchBar(props) {
+    var _this;
+
+    _classCallCheck(this, PropertySearchBar);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      filterActive: false,
+      cities: [],
+      city: undefined,
+      priceMin: undefined,
+      priceMax: undefined,
+      tipoInmueble: undefined,
+      bedroom_count: undefined
+    };
+    return _this;
+  }
+
+  _createClass(PropertySearchBar, [{
+    key: "handleChangeCity",
+    value: function handleChangeCity(e) {
+      this.setState({
+        city: e.target.value,
+        filterActive: true
+      });
     }
-  };
-});
+  }, {
+    key: "handleChangePriceMin",
+    value: function handleChangePriceMin(e) {
+      this.setState({
+        priceMin: e.target.value,
+        filterActive: true
+      });
+    }
+  }, {
+    key: "handleChangePriceMax",
+    value: function handleChangePriceMax(e) {
+      this.setState({
+        priceMax: e.target.value,
+        filterActive: true
+      });
+    }
+  }, {
+    key: "handleChangeTipoInmueble",
+    value: function handleChangeTipoInmueble(e) {
+      this.setState({
+        tipoInmueble: e.target.value,
+        filterActive: true
+      });
+    }
+  }, {
+    key: "handleChangeBedroomCount",
+    value: function handleChangeBedroomCount(e) {
+      this.setState({
+        bedroom_count: e.target.value,
+        filterActive: true
+      });
+    }
+  }, {
+    key: "handleClickBuscar",
+    value: function handleClickBuscar(e) {
+      if (this.state.filterActive) {
+        var newFilter = {
+          city: this.state.city,
+          priceMin: this.state.priceMin,
+          priceMax: this.state.priceMax,
+          tipeA: this.state.tipoInmueble,
+          bedroom: this.state.bedroom_count
+        };
+        this.props.callbackFromParent(newFilter);
+      } else this.props.callbackFromParent({});
+    }
+  }, {
+    key: "componentDidMount",
+    value: function () {
+      var _componentDidMount = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var dataCities;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return getCitiesAsync();
 
-function PropertySearchBar() {
-  var classes = useStyles();
+              case 2:
+                dataCities = _context.sent;
+                this.setState({
+                  cities: dataCities
+                });
 
-  var _React$useState = _react.default.useState(''),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      ciudad = _React$useState2[0],
-      setCiudad = _React$useState2[1];
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
 
-  var _React$useState3 = _react.default.useState(''),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
-      precioMin = _React$useState4[0],
-      setPrecioMin = _React$useState4[1];
+      function componentDidMount() {
+        return _componentDidMount.apply(this, arguments);
+      }
 
-  var _React$useState5 = _react.default.useState(''),
-      _React$useState6 = _slicedToArray(_React$useState5, 2),
-      precioMax = _React$useState6[0],
-      setPrecioMax = _React$useState6[1];
+      return componentDidMount;
+    }()
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/_react.default.createElement("div", {
+        style: {
+          display: 'flex-wrap',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }
+      }, /*#__PURE__*/_react.default.createElement(_FormControl.default, {
+        style: {
+          marginLeft: 20,
+          spacing: 3,
+          minWidth: 170
+        }
+      }, /*#__PURE__*/_react.default.createElement(_InputLabel.default, {
+        id: "select-lblCiudad"
+      }, "Ciudad"), /*#__PURE__*/_react.default.createElement(_Select.default, {
+        labelId: "select-lblCiudad",
+        id: "select-ciudad",
+        value: this.state.city,
+        onChange: this.handleChangeCity.bind(this)
+      }, this.state.cities.map(function (ciudad) {
+        return /*#__PURE__*/_react.default.createElement(_MenuItem.default, {
+          key: ciudad.city,
+          value: ciudad.city
+        }, ciudad.city);
+      }))), /*#__PURE__*/_react.default.createElement(_TextField.default, {
+        style: {
+          marginLeft: 20
+        },
+        label: "Precio Min.",
+        value: this.state.precioMin,
+        onChange: this.handleChangePriceMin.bind(this),
+        name: "numberformat",
+        id: "formatted-numberformat-input"
+      }), /*#__PURE__*/_react.default.createElement(_TextField.default, {
+        style: {
+          marginLeft: 20
+        },
+        label: "Precio Max.",
+        value: this.state.precioMax,
+        onChange: this.handleChangePriceMax.bind(this),
+        name: "numberformat",
+        id: "formatted-numberformat-input"
+      }), /*#__PURE__*/_react.default.createElement(_FormControl.default, {
+        style: {
+          marginLeft: 20,
+          spacing: 3,
+          minWidth: 170
+        }
+      }, /*#__PURE__*/_react.default.createElement(_InputLabel.default, {
+        id: "select-lblTipoInmueble"
+      }, "Tipo de Inmueble"), /*#__PURE__*/_react.default.createElement(_Select.default, {
+        labelId: "select-lblTipoInmueble",
+        id: "select-inmueble",
+        value: this.state.tipoInmueble,
+        onChange: this.handleChangeTipoInmueble.bind(this)
+      }, /*#__PURE__*/_react.default.createElement(_MenuItem.default, {
+        value: ''
+      }), /*#__PURE__*/_react.default.createElement(_MenuItem.default, {
+        value: 'Casa'
+      }, "Casa"), /*#__PURE__*/_react.default.createElement(_MenuItem.default, {
+        value: 'Departamento'
+      }, "Departamento"))), /*#__PURE__*/_react.default.createElement(_TextField.default, {
+        style: {
+          marginLeft: 20
+        },
+        label: "Dormitorios",
+        value: this.state.bedroom_count,
+        onChange: this.handleChangeBedroomCount.bind(this),
+        name: "numberformat",
+        id: "formatted-numberformat-input"
+      }), /*#__PURE__*/_react.default.createElement(_Button.default, {
+        style: {
+          marginLeft: 20,
+          marginTop: 10
+        },
+        variant: "contained",
+        color: "primary",
+        onClick: this.handleClickBuscar.bind(this),
+        endIcon: /*#__PURE__*/_react.default.createElement(_Search.default, null, "BUSCAR")
+      }, "buscar"));
+    }
+  }]);
 
-  var _React$useState7 = _react.default.useState(''),
-      _React$useState8 = _slicedToArray(_React$useState7, 2),
-      inmueble = _React$useState8[0],
-      setTipoInmueble = _React$useState8[1];
-
-  var handleChangeCiudad = function handleChangeCiudad(event) {
-    setCiudad(event.target.value);
-  };
-
-  var handleChangePrecioMin = function handleChangePrecioMin(event) {
-    setPrecioMin(event.target.value);
-  };
-
-  var handleChangePrecioMax = function handleChangePrecioMax(event) {
-    setPrecioMax(event.target.value);
-  };
-
-  var handleChangeTipoInmueble = function handleChangeTipoInmueble(event) {
-    setTipoInmueble(event.target.value);
-  };
-
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: classes.divSearch
-  }, /*#__PURE__*/_react.default.createElement(_FormControl.default, {
-    className: classes.formControl
-  }, /*#__PURE__*/_react.default.createElement(_InputLabel.default, {
-    id: "select-lblCiudad"
-  }, "Ciudad"), /*#__PURE__*/_react.default.createElement(_Select.default, {
-    labelId: "select-lblCiudad",
-    id: "select-ciudad",
-    value: ciudad,
-    onChange: handleChangeCiudad
-  }, lugar.map(function (ciudad) {
-    return /*#__PURE__*/_react.default.createElement(_MenuItem.default, {
-      value: ciudad.id
-    }, ciudad.nombre);
-  }))), /*#__PURE__*/_react.default.createElement(_TextField.default, {
-    className: classes.TextField,
-    label: "Precio Min.",
-    value: precioMin,
-    onChange: handleChangePrecioMin,
-    name: "numberformat",
-    id: "formatted-numberformat-input"
-  }), /*#__PURE__*/_react.default.createElement(_TextField.default, {
-    className: classes.TextField,
-    label: "Precio Max.",
-    value: precioMax,
-    onChange: handleChangePrecioMax,
-    name: "numberformat",
-    id: "formatted-numberformat-input"
-  }), /*#__PURE__*/_react.default.createElement(_FormControl.default, {
-    className: classes.formControl
-  }, /*#__PURE__*/_react.default.createElement(_InputLabel.default, {
-    id: "select-lblTipoInmueble"
-  }, "Tipo Inmueble"), /*#__PURE__*/_react.default.createElement(_Select.default, {
-    labelId: "select-lblTipoInmueble",
-    id: "select-tipoInmueble",
-    value: inmueble,
-    onChange: handleChangeTipoInmueble
-  }, tipoInmueble.map(function (tipoInmueble) {
-    return /*#__PURE__*/_react.default.createElement(_MenuItem.default, {
-      value: tipoInmueble.id
-    }, tipoInmueble.nombre);
-  }))), /*#__PURE__*/_react.default.createElement(_TextField.default, {
-    className: classes.TextField,
-    id: "standard-number",
-    label: "Dormitorios",
-    type: "number"
-  }), /*#__PURE__*/_react.default.createElement(_Button.default, {
-    variant: "contained",
-    color: "primary",
-    className: classes.button,
-    endIcon: /*#__PURE__*/_react.default.createElement(_Search.default, null, "BUSCAR")
-  }, "buscar"));
-} //Deberian ser reemplazados por la API
-
-
-var lugar = [{
-  id: 1,
-  nombre: 'Neuquen'
-}, {
-  id: 2,
-  nombre: 'Cipolletti'
-}, {
-  id: 3,
-  nombre: 'Centenario'
-}, {
-  id: 4,
-  nombre: 'General Roca'
-}]; //Deberian ser reemplazados por la API
-
-var tipoInmueble = [{
-  id: 1,
-  nombre: 'Edificio'
-}, {
-  id: 2,
-  nombre: 'Duplex'
-}, {
-  id: 3,
-  nombre: 'Departamento'
-}, {
-  id: 4,
-  nombre: 'Casa c/garage'
-}, {
-  id: 4,
-  nombre: 'Casa s/garage'
-}];
+  return PropertySearchBar;
+}(_react.default.Component);
 
 var _default = (0, _reactRouterDom.withRouter)(PropertySearchBar);
 
